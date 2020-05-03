@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Posts Related to Tags{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/post/post.css" %}{% endblock extraStyle %}
+
+{% block content %}
+{% load custom_tags %}
+{% getCookies "/post/tag/" as isBlogStyle %}{# get post style #}
+<div class="tagCloudContainer">
+    <div class="tagCloud">
+        {% load tagging_tags %}
+        {% tag_cloud_for_model post.Post as tags with steps=8 min_count=1 distribution=log %}
+        {% for tag in tags %}
+        <div class="tagChip tag-{{ tag.font_size }}">
+            <a href="{% url 'post:postTLV' tag.name %}">{{ tag.name }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if tagName %}
+<div class="postListContainer">
+    <h2>Posts Related to "{{ tagName }}"</h2>
+    
+    <div class="switchBox">
+        <label class="switch">
+            <input type="checkbox" onclick="UI.switchPostStyle('/post/tag/', this.checked)" {% if isBlogStyle == "true" %}checked{% endif %}>
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    {% with postNo=page_obj.start_index totalCnt=paginator.count %}
+    {% for post in posts %}
+    {% with postNo|add:forloop.counter0|sub:1 as no %}
+    {% if isBlogStyle == "true" %}
+    <div class="postRowBlogStyle">
+        <div class="postTitle">
+            <div class="postNo">{{ totalCnt|sub:no }}.</div>
+            <a href="{{ post.get_absolute_url }}" class="{{ post.post_isEnabled|yesno:",textDel" }}">{{ post.post_title|striptags }}</a>
+        </div>
+        <div class="postLine {% getPostFlagStyle post.post_crte_dt post.post_mdfy_dt %}""></div>
+        <div class="postInfo">
+            <div class="postDate">
+                {{ post.post_crte_dt|date:"Y.m.d" }}
+            </div>
+            <div class="postComment">
+                <i class="fa fa-commenting-o"></i> <span class="disqus-comment-count" data-disqus-identifier="{{ post.post_uid }}"></span>
+            </div>
+        </div>
+        <div class="postContent">
+            {{ post.post_content|striptags|truncatechars:200|linebreaksbr }}
+        </div>
+    </div>
+    {% else %}
+    <div class="postRowBoardStyle {% cycle "row1" "row2" %}">
+        <div class="postNo">{{ totalCnt|sub:no }}</div>
+        <div class="postFlag {% getPostFlagStyle post.post_crte_dt post.post_mdfy_dt %}"></div>
+        <div class="postTitle">
+            <a href="{{ post.get_absolute_url }}" class="{{ post.post_isEnabled|yesno:",textDel" }}">{{ post.post_title|striptags }}</a>
+            <div class="postComment">
+                <i class="fa fa-commenting-o"></i> <span class="disqus-comment-count" data-disqus-identifier="{{ post.post_uid }}"></span>
+            </div>
+        </div>
+        <div class="postDate">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    {{ post.post_crte_dt|date:"Y.m.d" }}
+                </div>
+                <div class="flip-box-back">
+                    {{ post.post_mdfy_dt|date:"Y.m.d" }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+    {% endwith %}
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    {% include "post/post_pageNavi.html" %}
+</div>
+<script id="dsq-count-scr" src="//blog-anzinda-com.disqus.com/count.js" async></script>
+{% endif %}
+{% endblock content %}

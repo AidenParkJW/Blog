@@ -1,0 +1,233 @@
+{% if isEditable %}
+<input type="file" id="fileInput" onchange="addFile(event)" multiple hidden/>
+{% endif %}
+<div id="fileContainer">
+    <div id="fileBox"
+        {% if isEditable %}
+        class="emptyFileBox"
+        ondrop="drop(event)" ondragover="dragover(event)" ondblclick="openFileBrowser(event)"
+        {% else %}
+        class="hideFileBox"
+        {% endif %}
+        >
+        
+        {% if isEditable %}
+        <div id="emptyMsg">
+            <div>
+                <div class="fas fa-cloud-upload-alt uploadIcon"></div>
+                <div class="uploadMsg">Double click or drag & drop to attach files</div>
+            </div>
+            
+        </div>
+        {% endif %}
+    </div>
+    <div id="fileStatus" class="box pointer" onclick="switchFileBox()">
+        <div>Total of Attached file</div>
+        <div class="spacer"></div>
+        <div id="statusMsg">0.00 Bytes of 0 files</div>
+    </div>
+</div>
+
+<script>
+AttFile.load({{ content_type }}, {{ object_uid|default:"0" }}, addRowBulk);
+AttFile.addListenerChangeFile(showFileStatus);
+
+{% if isEditable %}
+AttFile.addListenerUploadPrgs(showProgressBar);
+
+function showProgressBar(percent)
+{
+    var _fileContainer = document.getElementById("fileContainer");
+    var _fileStatus = document.getElementById("fileStatus");
+    var _progBar = document.getElementById("progressBar");
+    var _progBarTxt = document.getElementById("progressBarTxt");
+    
+    if (_progBar == null)
+    {
+        _progBar = document.createElement("div");
+        _progBar.id = "progressBar";
+        _progBar.style.height    = _fileStatus.offsetHeight + "px";
+        _progBar.style.width     = "1px";
+        _progBar.style.left      = _fileStatus.offsetLeft + "px";
+        _progBar.style.top       = _fileStatus.offsetTop + "px";
+        _progBar.style.opacity   = 1;
+        
+        _progBarTxt = document.createElement("span");
+        _progBarTxt.id = "progressBarTxt";
+        _progBar.appendChild(_progBarTxt);
+        
+        _fileContainer.appendChild(_progBar);
+    }
+
+    _progBar.style.width = (_fileStatus.offsetWidth * percent / 100) + "px";
+    _progBarTxt.textContent = Math.round(percent) + "%";
+    
+    if (percent == 100)
+    {
+        var _fnc =  function()
+                    {
+                        _op = _progBar.style.opacity - 0.01;
+                        _progBar.style.opacity = _op;
+                        
+                        if (_op == 0)
+                        {
+                            _fileContainer.removeChild(_progBar);
+                        }
+                        else
+                        {
+                            setTimeout(_fnc, 10);
+                        }
+                    };
+        
+        _fnc();
+    }
+}
+
+function openFileBrowser(event)
+{
+    var _fileInput = document.getElementById("fileInput");
+    _fileInput.click();
+}
+
+function addFile(event)
+{
+    var _len = event.target.files.length;
+    for (var i = 0; i < _len; i++)
+    {
+        addRow(event.target.files[i]);
+    }
+    
+    event.target.value = null;
+}
+
+function dragover(event)
+{
+    event.preventDefault();
+    event.stopPropagation();
+}
+
+function drop(event) 
+{
+    event.preventDefault();
+    event.stopPropagation();
+    
+    var _files = event.dataTransfer.files;
+    for (var i = 0; i < _files.length; i++)
+    {
+        addRow(_files[i]);
+    }
+}
+{% endif %}
+    
+function addRow(file)
+{
+    var _fileBox = document.getElementById("fileBox");
+
+    var _newRow = document.createElement("div");
+    _newRow.className = "box fileRow";
+    _fileBox.appendChild(_newRow);
+    
+    {% if isEditable %}
+    var _fileSts = document.createElement("div")
+    _fileSts.className = "fileSts";
+    _fileSts.appendChild(document.createTextNode(UT.isFile(file) ? "＋" : ""));
+    _newRow.appendChild(_fileSts);
+    {% endif %}
+    
+    var _fileName = document.createElement("div");
+    
+    {% if not isEditable %}
+    _fileName.className = "pointer"
+    _fileName.onclick = function()
+                        {
+                            AttFile.download(file);
+                        }
+    {% endif %}
+    
+    _fileName.appendChild(document.createTextNode(file.name));
+    _newRow.appendChild(_fileName);
+    
+    var _spacer = document.createElement("div");
+    _spacer.className = "spacer";
+    _newRow.appendChild(_spacer);
+    
+    var _fileSize = document.createElement("div");
+    _fileSize.appendChild(document.createTextNode(UT.formatedFileSize(file.size)));
+    _newRow.appendChild(_fileSize);
+    
+    {% if isEditable %}
+    var _fileDel = document.createElement("a");
+    _fileDel.className = "fileDel";
+    _fileDel.appendChild(document.createTextNode("×"));
+    _fileDel.onclick =  function() 
+                        {
+                            if (UT.isFile(file))
+                            {
+                                _fileBox.removeChild(_newRow);
+                            }
+                            else
+                            {
+                                if (AttFile.isRemoved(file))
+                                {
+                                    _fileName.classList.remove("textDel");
+                                }
+                                else
+                                {
+                                    _fileName.classList.add("textDel");
+                                }
+                            }
+                            
+                            AttFile.remove(file);
+                        };
+    _newRow.appendChild(_fileDel);
+    {% endif %}
+    
+    AttFile.add(file);
+}
+
+function addRowBulk(files)
+{
+    if (UT.isArray(files))
+    {
+        files.forEach(function(file, index, array)
+        {
+            addRow(file);
+        });
+    }
+}
+
+function showFileStatus()
+{
+    document.getElementById("statusMsg").innerHTML = AttFile.status();
+    
+    var _fileBox = document.getElementById("fileBox");
+    var _emptyMsg = document.getElementById("emptyMsg");
+    
+    if (_fileBox != null && _emptyMsg != null)
+    {
+        if (AttFile.isEmpty())
+        {
+            _fileBox.classList.add("emptyFileBox");
+            _emptyMsg.classList.remove("hideMsg");
+        }
+        else
+        {
+            _fileBox.classList.remove("emptyFileBox");
+            _emptyMsg.classList.add("hideMsg");
+        }
+    }
+}
+
+function switchFileBox()
+{
+    var _fileBox = document.getElementById("fileBox");
+    if (_fileBox.classList.contains("hideFileBox"))
+    {
+        _fileBox.classList.remove("hideFileBox");
+    }
+    else
+    {
+        _fileBox.classList.add("hideFileBox");
+    }
+}
+</script>

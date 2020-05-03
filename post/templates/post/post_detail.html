@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.post_title|striptags }}{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/post/post.css" %}{% endblock extraStyle %}
+{% block extraScript %}{% static "javascript/post/prism.js" %}{% endblock extraScript %}
+
+{% block content %}
+{% load custom_tags %}
+<div class="postDetailContainer">
+    <div class="title">
+        <div class="postTitle">
+            {{ post.post_title|striptags }}<span class="pipe">|</span><span class="menuName">{{ post.menu }}</span>
+        </div>
+        <div class="link">
+            <a href="{{ post.get_list_url }}"><i class="fa fa-bars"> List</i></a>
+        </div>
+    </div>
+    
+    <div class="moreInfo">
+        <div class="postWriter">
+            {{ post.post_crte_dt|date:"Y.m.d H:i:s"}}
+            <span class="pipe">|</span>
+            {{ post.post_mdfy_dt|date:"Y.m.d H:i:s"}}
+            <span class="pipe">|</span>
+            {{ post.post_crte_user.first_name }}
+        </div>
+        <div class="download">
+            <i class="fa fa-download"> Download</i>
+        </div>
+    </div>
+    
+    <div class="space-h10"></div>
+    
+    <div class="postContent">
+        {{ post.post_content|safe }}
+    </div>
+
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    <div class="box buttonBox">
+        <div>
+            {% if user.is_active %}
+            <a href="{{ post.get_create_url }}"><i class="fa fa-edit"> Write</i></a>
+            {% endif %}
+        </div>
+        <div class="spacer"></div>
+        <div>
+            {% if user.id == post.post_crte_user_id or user.is_superuser %}
+            <a href="{{ post.get_update_url }}"><i class="fa fa-edit"> Edit</i></a>
+            <span class="pipe">|</span>
+            <a href="{{ post.get_delete_url }}"><i class="fa fa-trash-o"> Delete</i></a>
+            <span class="pipe">|</span>
+            {% endif %}
+            <a href="{{ post.get_list_url }}"><i class="fa fa-bars"> List</i></a>
+        </div>
+    </div>
+    
+    <div class="otherPosts">
+    {% for other in other_posts %}
+        <div class="otherRow {% cycle "row1" "row2" %}">
+            <div class="otherTitle">
+                <a href="{{ other.get_absolute_url }}">
+                {% if other.post_uid == post.post_uid %}
+                <b>{{ other.post_title|striptags }}</b>
+                {% else %}
+                {{ other.post_title|striptags }}
+                {% endif %}
+                </a>
+            </div>
+            <div class="otherDate">
+                {{ other.post_crte_dt|date:"Y.m.d" }}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    {% load tagging_tags %}
+    <div class="tagsBox">
+        <i class="fa fa-tags tagIcon"></i>
+        <div class="space-w10"></div>
+        
+        {% tags_for_object post as tags %}
+        {% for tag in tags %}
+        <div class="tagChip">
+            <a href="{% url 'post:postTLV' tag.name %}">{{ tag.name }}</a>
+        </div>
+        {% endfor %}
+        
+        <div class="space-w10"></div>
+        <a href="{% url 'post:tagCloud' %}"><i class="fa fa-cloud tagClodeIcon"> TagCloud</i></a>
+    </div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+
+    {% load disqus_tags %}
+    {% url 'post:postDV'            post.menu.menu_uid post.post_uid as thisUrlBfr %}
+    {% url 'post:postDVforDisqus'   post.menu.menu_uid post.post_uid as thisUrlAft %}
+    {% replace request.build_absolute_uri thisUrlBfr thisUrlAft as thisUrl %}
+    {% set_disqus_url thisUrl %}
+    {% set_disqus_identifier  post.post_uid|stringformat:"i" %}
+    {% disqus_show_comments %}
+</div>
+{% endblock content %}

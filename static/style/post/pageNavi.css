@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/******************************************************** 
+ * Page Navigation
+ ********************************************************/
+.pageNavi {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-flex;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    /*dodgerblue*/
+    background-color: #f44336;
+    color: white;
+    border: 1px solid #f44336;
+}
+
+.pagination a.inactive {
+    background-color: #f1f1f1;
+    color: #bbb;
+    border: 1px solid #ddd;
+}
+
+.pagination a:hover:not(.active):not(.inactive) {
+    background-color: #ddd;
+}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

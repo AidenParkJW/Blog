@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>{% block title %}Aiden Blog{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static "style/base.css" %}" />
+        <link rel="stylesheet" type="text/css" href="{% block extraStyle %}{% endblock extraStyle %}" />
+        
+        <script src="https://kit.fontawesome.com/2306f2f525.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static "javascript/ut.js" %}"></script>
+        <script type="text/javascript" src="{% static "javascript/ui.js" %}"></script>
+        <script type="text/javascript" src="{% static "javascript/file.js" %}"></script>
+        <script type="text/javascript" src="{% block extraScript %}{% endblock extraScript %}"></script>
+    </head>
+
+    <body>
+        <div id="header">
+            <div class="title"><a href="{% url 'home' %}" id="linkHome">{{ site.name }}</a></div>
+            
+            {% if user.is_active %}
+            <div class="welcome">
+                Welcome,
+                <strong>
+                    {% load socialaccount %}
+                    {% get_social_accounts user as socialAccount %}
+                    
+                    {% if socialAccount %}
+                        {% firstof user.get_short_name user.get_username %}
+                    {% else %}
+                        <a href="{% url 'profile' %}">{% firstof user.get_short_name user.get_username %}</a>
+                    {% endif %}
+                </strong>
+                
+                {% if user.is_superuser %}
+                / <a href="{% url 'admin:index' %}">View Admin</a>
+                {% endif%}
+                / <a href="{% url 'logout' %}">LOG OUT</a>
+            </div>
+            {% else %}
+            <div class="welcome">
+                Welcome, Anonymous / 
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div id="toolBar">
+            <div class="hScrollContainer">
+                <div id="hScrollBar"></div>
+            </div>
+            
+            <div class="iconBar">
+                <button class="iconBtn" onclick="document.getElementById('linkHome').click()"><i class="fa fa-home"></i></button>
+                
+                <div id="topNavi">
+                {% load custom_tags %}
+                {% getMenuPath as menuPath %}
+                {{ menuPath|safe }}
+                </div>
+                
+                <div class="searchBar">
+                    <form action="{% url 'post:search' %}" method="post">{% csrf_token %}
+                        <input type="text" name="search_word" placeholder="Search.." maxlength="20" required/>
+                    </form>
+                </div>
+                
+                <button class="iconBtn" onclick="UI.switchMenu()"><i class="fa fa-bars"></i></button>
+            </div>
+        </div>
+        
+        <div id="mainContainer">
+            <div id="content">
+            {% block content %}{% endblock content %}
+            </div>
+            
+            <div id="menuNavi">
+            {% include "menu.html" %}
+            </div>
+        </div>
+        
+        <div id="footer">
+        {% include "footer.html" %}
+        </div>
+    </body>
+</html>

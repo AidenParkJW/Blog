@@ -1,0 +1,561 @@
+@charset "utf-8";
+@import url("pageNavi.css");
+@import url("tagCloud.css");
+@import url("prism.css");
+
+/******************************************************** 
+ * Toggle Switch
+ ********************************************************/
+.switchBox {
+    text-align: right;
+}
+ 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 24px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+/******************************************************** 
+ * Post List Blog style
+ ********************************************************/
+.postListContainer {
+    margin: 20px auto;
+    width: 95%;
+}
+
+.postListContainer .buttonBox {
+    text-align: right;
+}
+
+.postListContainer .postRowBlogStyle {
+    margin: 5px 0px 45px 0px;
+}
+
+.postListContainer .postRowBlogStyle:hover {
+/*     background-color: #fbfbfb;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s; */
+}
+
+.postRowBlogStyle .postTitle {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.postRowBlogStyle .postTitle .postNo {
+    padding-right: 5px;
+    display: inline-block;
+}
+
+.postRowBlogStyle .postTitle > a {
+/*     text-decoration: none; */
+}
+
+.postRowBlogStyle .postLine {
+    margin: 3px 0px;
+    height: 2.4px;
+    background-color: #999999;
+    opacity: 0.8;
+}
+
+.postRowBlogStyle .postNew {
+    background-color: #72c02c;
+}
+
+.postRowBlogStyle .postUpd {
+    background-color: #2196F3;
+}
+
+.postRowBlogStyle .postInfo {
+    color: #777777;
+    font-size: 13px;
+    margin: 0px 0px 15px 0px;
+    display: flex;
+}
+
+.postRowBlogStyle .postInfo .postDate {
+    width: calc(100% - 60px);
+    align-self: flex-end;
+}
+
+.postRowBlogStyle .postInfo .postComment {
+    width: 60px;
+    text-align: right;
+}
+
+.postRowBlogStyle .postInfo .postComment > i {
+    font-size: 18px;
+}
+
+.postRowBlogStyle .postContent {
+
+}
+
+/******************************************************** 
+ * Post List Board style
+ ********************************************************/
+ .postListContainer .row1 {
+    background-color: #e9e9e9;
+}
+
+.postListContainer .row2 {
+    background-color: #f5f5f5;
+}
+ 
+.postListContainer .postRowBoardStyle {
+    display: flex;
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+.postListContainer .postRowBoardStyle:hover {
+    background-color: #fbfbfb;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.postRowBoardStyle .postNo {
+    width: 50px;
+    background-color: #777;
+    color: #fff;
+    border-radius: 5px 0px 0px 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postRowBoardStyle .postFlag {
+    width: 5px;
+    background-color: #cccccc;
+    opacity: 0.8;
+}
+
+.postRowBoardStyle .postNew {
+    background-color: #fffc00;
+}
+
+.postRowBoardStyle .postUpd {
+    background-color: #2196F3;
+}
+
+.postRowBoardStyle:hover .postFlag {
+    opacity: 1;
+}
+
+.postRowBoardStyle .postTitle {
+    padding: 10px 0px 10px 10px;
+    font-weight: bold;
+    width: calc(100% - 145px);
+}
+
+.postRowBoardStyle .postTitle > a {
+    text-decoration: none;
+}
+
+.postRowBoardStyle .postTitle .postComment {
+    width: 40px;
+    text-align: right;
+    display: inline-block;
+}
+
+.postRowBoardStyle .postTitle .postComment > i {
+    font-size: 18px;
+}
+
+.postRowBoardStyle .postTitle .disqus-comment-count {
+    font-size: 13px;
+}
+
+.postRowBoardStyle .postDate {
+    perspective: 1000px;
+    height: 18px;
+    align-self: center;
+}
+
+.postRowBoardStyle .postDate .flip-box-inner {
+    position: relative;
+    width: 90px;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    float: right;
+}
+
+.postRowBoardStyle .postDate:hover .flip-box-inner {
+    transform: rotateX(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-box-front {
+    background-color: transparent;
+}
+
+.flip-box-back {
+    color: #0275d8;
+    transform: rotateX(180deg);
+}
+
+/******************************************************** 
+ * Search Box
+ ********************************************************/
+.searchBox form {
+    margin: auto;
+    max-width: 300px;
+    display: flex;
+}
+
+.searchBox form input[type=text] {
+    float: left;
+    width: 80%;
+    padding: 7px;
+    background: #f1f1f1;
+    border: 1px solid grey;
+}
+
+.searchBox form button {
+    float: left;
+    width: 20%;
+    padding: 7px;
+    background: #2196F3;
+    color: white;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+.searchBox form button:hover {
+    background: #0b7dda;
+}
+
+/******************************************************** 
+ * Post Detail
+ ********************************************************/
+.postDetailContainer {
+    margin: 20px auto;
+    width: 95%;
+}
+
+.postDetailContainer .title {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 2px dotted #aaa;
+}
+
+.postDetailContainer .title > div {
+    padding-bottom: 5px;
+}
+
+.title .postTitle {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0px 0px;
+    width: calc(100% - 50px);
+}
+
+.title .postTitle .menuName {
+    font-size: 14px;
+    font-weight: normal;
+    color: #aaa;
+}
+
+.title .link {
+    width: 50px;
+    text-align: right;
+}
+
+.postDetailContainer .moreInfo {
+    display: flex;
+}
+
+.moreInfo .postWriter {
+    padding-top: 4px;
+    font-size: 12px;
+    width: calc(100% - 120px);
+}
+
+.moreInfo .download {
+    width: 120px;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.postDetailContainer .postContent {
+    min-height: 600px;
+/*     overflow: auto; */
+/*     word-wrap: break-word; */
+/*     white-space: pre; */
+}
+
+.postDetailContainer .buttonBox {
+    margin-bottom: 3px;
+}
+
+.pipe {
+    font-size: 10px;
+    color: #ccc;
+    vertical-align: middle;
+    padding: 0px 8px;
+}
+
+/******************************************************** 
+ * The Other Post List
+ ********************************************************/
+.postDetailContainer .otherPosts {
+    padding: 3px;
+    margin: auto;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.otherPosts .otherRow{
+    display: table;
+}
+
+.otherPosts .otherRow:hover a {
+    /* text-decoration: underline; */
+}
+
+.otherPosts .row1 {
+    background-color: #e9e9e9;
+}
+
+.otherPosts .row2 {
+    background-color: #f5f5f5;
+}
+
+.otherPosts .otherRow .otherTitle{
+    display: table-cell;
+    width: 100%;
+    padding: 5px 5px 5px 10px;
+}
+
+.otherPosts .otherRow .otherDate{
+    display: table-cell;
+    padding: 5px 10px 5px 5px;
+}
+
+/******************************************************** 
+ * Tags Box
+ ********************************************************/
+.tagsBox {
+    place-items: flex-end;
+    display: inline-flex;
+}
+
+.tagsBox .tagIcon {
+    font-size: 20px;
+    color: red;
+}
+
+.tagsBox .tagChip {
+    padding: 3px 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: #2196F3;
+    opacity: 0.6;
+    margin: 0px 3px;
+    transition: .5s;
+}
+
+.tagsBox .tagChip:hover {
+    opacity: 1;
+}
+
+.tagsBox .tagChip a {
+    color: white;
+    text-decoration: none;
+}
+
+.tagsBox .tagClodeIcon {
+    padding: 3px 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    opacity: 0.8;
+    transition: .5s;
+}
+
+.tagsBox .tagClodeIcon:hover {
+    color: #FFFFFF;
+    background-color: #000000;
+    opacity: 1;
+}
+
+/******************************************************** 
+ * Post Form
+ ********************************************************/
+.postFormContainer {
+    margin: 20px auto;
+    width: 95%;
+}
+
+.postFormContainer label {
+    margin: 0px 0px 5px 0px;
+    display: inline-block;
+}
+
+.postFormContainer input[type=text] {
+    width: calc(100% - 30px);
+    padding: 15px;
+    margin: 0px 0px 20px 0px;
+    border: none;
+    background: #f1f1f1;
+}
+
+.postFormContainer input[type=text]:focus {
+    background-color: #ddd;
+    /* outline: none; */
+}
+
+.postFormContainer input[type=checkbox] {
+    vertical-align: sub;
+}
+
+.postFormContainer hr {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    margin: 5px 0px 15px 0px;
+}
+
+.postFormContainer .clearfix {
+    margin: auto;
+    width: 50%;
+}
+
+.postFormContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 0px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    opacity: 0.9;
+    float: left;
+}
+
+.postFormContainer button:hover {
+    opacity:1;
+}
+
+.postFormContainer .cancelbtn {
+    background-color: #f44336;
+}
+
+.postFormContainer .submitbtn {
+    background-color: #4CAF50;
+}
+
+.postFormContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+ 
+/******************************************************** 
+ * Post Delete
+ ********************************************************/
+.postDeleteContainer * {
+    box-sizing: border-box;
+}
+
+.postDeleteContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.postDeleteContainer hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.postDeleteContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.postDeleteContainer button:hover {
+    opacity:1;
+}
+
+.postDeleteContainer .cancelbtn {
+    background-color: #f44336;
+}
+
+.postDeleteContainer .submitbtn {
+    background-color: #4CAF50;
+}
+
+.postDeleteContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+ 

@@ -1,0 +1,45 @@
+
+<br/>
+<p> ----- HttpRequst Attributes -----
+<br/>request.scheme : {{ request.scheme }}
+<br/>request.body : {{ request.body }}
+<br/>request.read : {{ request.read }}
+<br/>request.path : {{ request.path }}
+<br/>request.path_info : {{ request.path_info }}
+<br/>request.method : {{ request.method }}
+<br/>request.encoding : {{ request.encoding }}
+<br/>request.GET : {{ request.GET }}
+<br/>request.POST : {{ request.POST }}
+<br/>request.COOKIES : {{ request.COOKIES }}
+<br/>request.FILES : {{ request.FILES }}
+<br/>request.META : {{ request.META }}
+<br/>request.CONTENT_PARAMS : {{ request.content_params }}
+<br/>
+<p> ----- HttpRequst META items  -----
+{% for key, value in request.META.items %}
+    <br/>{{ key }} : {{ value }}
+{% endfor %}
+<br/>
+
+<br/>request.resolver_match : {{ request.resolver_match }}
+
+<p> ----- HttpRequst Attributes set by application code -----
+<br/>request.current_app : {{ request.current_app }}
+<br/>request.urlconf : {{ request.urlconf }}
+
+
+<p> ----- HttpRequst Attributes set by middleware  -----
+<br/>request.session : {{ request.session }}
+<br/>request.site : {{ request.site }}
+<br/>request.user : {{ request.user }}
+
+<p> ----- HttpRequst Methods  -----
+<br/>request.get_host : {{ request.get_host }}
+<br/>request.get_port : {{ request.get_port }}
+<br/>request.get_full_path : {{ request.get_full_path }}
+<br/>request.build_absolute_uri : {{ request.build_absolute_uri }}
+<br/>request.is_secure : {{ request.is_secure }}
+<br/>request.is_ajax : {{ request.is_ajax }}
+<br/>request.read : {{ request.read }}
+<br/>request.readline : {{ request.readline }}
+<br/>request.readlines : {{ request.readlines }}

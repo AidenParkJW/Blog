@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+.loginContainer *, .loginContainerBottom * {
+  box-sizing: border-box;
+}
+
+/* style the container */
+.loginContainer {
+    position: relative;
+    margin: 50px auto 0px;
+    max-width: 800px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px 0 30px 0;
+}
+
+/* style inputs and link buttons */
+.loginContainer input,
+.loginContainer .btn,
+.loginContainerBottom .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none; /* remove underline from anchors */
+}
+
+.loginContainer input:hover,
+.loginContainer .btn:hover,
+.loginContainerBottom .btn:hover{
+    opacity: 1;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.loginContainer .fb {
+    background-color: #3B5998;
+    color: white;
+}
+
+.loginContainer .twitter {
+    background-color: #55ACEE;
+    color: white;
+}
+
+.loginContainer .kakao {
+    background-color: #FEE500;
+    color: black;
+    padding: 11px 12px 10px 12px !important;
+}
+
+.loginContainer .kakaoIcon {
+    font-size: 22px;
+    margin-right: 5px;
+}
+    
+.loginContainer .naver {
+    background-color: #1EC800;
+    color: white;
+    padding: 11px 12px 10px 12px !important;
+}
+
+.loginContainer .naverIcon {
+    font-size: 26px;
+    margin-right: 5px;
+    font-weight: 900;
+    color: white;
+    vertical-align: text-bottom;
+    display: inline-block;
+}
+
+.loginContainer .google {
+    background-color: #DD4B39;
+    color: white;
+    padding: 11px 12px 10px 12px !important;
+}
+
+.loginContainer .googleIcon {
+    font-size: 22px;
+    margin-right: 7px;
+}
+
+.pipe {
+    font-size: 22px;
+    padding: 0px 8px;
+}
+
+/* style the submit button */
+.loginContainer input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.loginContainer input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* Two-column layout */
+.loginContainer .col,
+.loginContainerBottom .col {
+    float: left;
+    width: 50%;
+    margin: auto;
+    padding: 0 50px;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.loginContainer .row:after,
+.loginContainerBottom .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* vertical line */
+.loginContainer .vl {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid #ddd;
+    height: 175px;
+}
+
+/* text inside the vertical line */
+.loginContainer .vl .vl-innertext {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.loginContainer .hide-md-lg {
+    display: none;
+}
+
+/* bottom container */
+.loginContainerBottom {
+    margin: auto;
+    max-width: 800px;
+    text-align: center;
+    background-color: #666;
+    border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .loginContainer .col,
+  .loginContainerBottom .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .loginContainer .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .loginContainer .hide-md-lg {
+    display: block;
+    text-align: center;
+  }
+}

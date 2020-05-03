@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Raise error{% endblock title %}
+
+{% block content %}
+<div class="errorContainer">
+    <p><span>Raise error</span></p>
+    <p>{{ error_code }} : {{ error_msg }}</p>
+    <a href="{% url 'home' %}">Head back home</a> to try finding it again.</p>
+</div>
+{% endblock content %}

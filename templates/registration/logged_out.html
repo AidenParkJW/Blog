@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Logged out{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/login.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="messageContainer">
+    <div class="messageBox">
+        <p><span>Logged out.</span></p>
+        <p>Thanks for spending some quality time with the Web site today.</p>
+        <p>It moves automatically after 5 seconds.</p>
+        <p><a href="{% url 'login' %}" id="goHomeLink">Log in again</a></p>
+    </div>
+</div>
+
+<script>
+setTimeout(function() 
+{
+    document.getElementById("goHomeLink").click();
+}, 5000);
+</script>
+{% endblock content %}

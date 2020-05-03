@@ -1,0 +1,462 @@
+@charset "utf-8";
+
+/******************************************************** 
+ * Sign up 
+ ********************************************************/
+.signUpContainer * {
+    box-sizing: border-box;
+}
+
+/* The Modal (background) */
+.signUpContainer {
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    padding-top: 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Add padding to container elements */
+.signUpContainer .signUpForm {
+    background-color: #fefefe;
+    margin: 5% auto;
+    border: 1px solid #888;
+    max-width: 600px;
+    padding: 16px;
+}
+
+/* Style the horizontal ruler */
+.signUpContainer .signUpForm hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* Full-width input fields */
+.signUpContainer .signUpForm input[type=text],
+.signUpContainer .signUpForm input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+.signUpContainer .signUpForm input[type=text]:focus,
+.signUpContainer .signUpForm input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+.signUpContainer .signUpForm button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.signUpContainer .signUpForm button:hover {
+    opacity:1;
+}
+
+.signUpContainer .signUpForm .cancelBtn {
+    background-color: #f44336;
+}
+
+.signUpContainer .signUpForm .submitBtn {
+    background-color: #4CAF50;
+}
+
+/* The Close Button (x) */
+.signUpContainer #btnClose {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.signUpContainer #btnClose:hover,
+.signUpContainer #btnClose:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+/* Clear floats */
+.signUpContainer .signUpForm .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .signUpContainer .signUpForm .cancelBtn,
+  .signUpContainer .signUpForm .submitBtn {
+      width: 100%;
+  }
+}
+
+/******************************************************** 
+ * Profile change
+ ********************************************************/
+.profileContainer * {
+    box-sizing: border-box;
+}
+
+.profileContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.profileContainer hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.profileContainer input[type=text],
+.profileContainer input[type=email] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.profileContainer input[type=text]:focus,
+.profileContainer input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.profileContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    float: left;
+    width: 33.3%;
+}
+
+.profileContainer button:hover {
+    opacity:1;
+}
+
+.profileContainer .cancelBtn {
+    background-color: #f44336;
+}
+
+.profileContainer .submitBtn {
+    background-color: #4CAF50;
+}
+
+.profileContainer .withdrawBtn {
+    background-color: #666666;
+}
+
+.profileContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/******************************************************** 
+ * Withdraw
+ ********************************************************/
+.withdrawContainer * {
+    box-sizing: border-box;
+}
+
+ .withdrawContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.withdrawContainer hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.withdrawContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.withdrawContainer button:hover {
+    opacity:1;
+}
+
+.withdrawContainer .cancelBtn {
+    background-color: #f44336;
+}
+
+.withdrawContainer .submitBtn {
+    background-color: #4CAF50;
+}
+
+.withdrawContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/******************************************************** 
+ * Password Change
+ ********************************************************/
+.passwordChangeContainer * {
+    box-sizing: border-box;
+}
+
+.passwordChangeContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.passwordChangeContainer hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.passwordChangeContainer ul {
+    margin: 0px;
+}
+
+.passwordChangeContainer .help {
+    
+}
+.passwordChangeContainer .errorList {
+    color: #f44336;
+    margin-bottom: 20px;
+}
+
+.passwordChangeContainer input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.passwordChangeContainer input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.passwordChangeContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.passwordChangeContainer button:hover {
+    opacity:1;
+}
+
+.passwordChangeContainer .cancelBtn {
+    background-color: #f44336;
+}
+
+.passwordChangeContainer .submitBtn {
+    background-color: #4CAF50;
+}
+
+.passwordChangeContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/******************************************************** 
+ * Password Reset
+ ********************************************************/
+.passwordResetContainer * {
+    box-sizing: border-box;
+}
+
+.passwordResetContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.passwordResetContainer hr {
+    border: 1px solid #f1f1f1;
+}
+
+.passwordResetContainer hr + p {
+    margin-bottom: 25px;
+}
+
+.passwordResetContainer ul {
+    margin: 0px;
+}
+
+.passwordResetContainer .errorList {
+    color: #f44336;
+    margin-bottom: 20px;
+}
+
+.passwordResetContainer input[type=email] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.passwordResetContainer input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.passwordResetContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.passwordResetContainer button:hover {
+    opacity:1;
+}
+
+.passwordResetContainer .cancelBtn {
+    background-color: #f44336;
+}
+
+.passwordResetContainer .submitBtn {
+    background-color: #4CAF50;
+}
+
+.passwordResetContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/******************************************************** 
+ * Password Reset Confirm
+ ********************************************************/
+.passwordResetConfirmContainer * {
+    box-sizing: border-box;
+}
+
+.passwordResetConfirmContainer {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 16px;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.passwordResetConfirmContainer hr {
+    border: 1px solid #f1f1f1;
+}
+
+.passwordResetConfirmContainer hr + p {
+    margin-bottom: 25px;
+}
+
+.passwordResetConfirmContainer ul {
+    margin: 0px;
+}
+
+.passwordResetConfirmContainer .errorList {
+    color: #f44336;
+    margin-bottom: 20px;
+}
+
+.passwordResetConfirmContainer input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.passwordResetConfirmContainer input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.passwordResetConfirmContainer button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+}
+
+.passwordResetConfirmContainer button:hover {
+    opacity:1;
+}
+
+.passwordResetConfirmContainer .cancelBtn {
+    background-color: #f44336;
+}
+
+.passwordResetConfirmContainer .submitBtn {
+    background-color: #4CAF50;
+}
+
+.passwordResetConfirmContainer .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Post Writing{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/post/post.css" %}{% endblock extraStyle %}
+{% block extraScript %}{% static "javascript/tinymce_5.2.1_dev/js/tinymce/tinymce.min.js" %}{% endblock extraScript %}
+
+{% block content %}
+<div class="postFormContainer">
+    {% if form.errors %}
+    <div id="errorMsg">
+        <p>Wrong! Please correct the error(s) below.</p>
+        {{ form.errors }}
+    </div>
+    <div class="space-h10"></div>
+    {% endif %}
+    
+    <form action="." method="post">{% csrf_token %}
+        <label><b>{{ form.post_title.label }}</b></label>
+        {{ form.post_title }}
+        
+        <label><b>{{ form.post_content.label }}</b></label>
+        {{ form.post_content }}
+        
+        <div class="space-h10"></div>
+        <div class="space-h10"></div>
+        
+        <label><b>{{ form.post_tag.label }}</b></label>
+        {{ form.post_tag }}
+        
+        <label><b>{{ form.post_isEnabled.label }}</b></label>
+        {{ form.post_isEnabled }}
+        
+        <div class="space-h10"></div>
+        
+        {% include "file.html" with content_type=post.content_type.id object_uid=post.post_uid isEditable=isEditable only %}
+
+        <hr/>
+        
+        <div class="clearfix">
+            <button type="button" class="cancelBtn" onclick="location.href='{{ historyBack }}'">Cancel</button>
+            <button type="submit" class="submitBtn">Save</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{% static "javascript/tinymce_5.2.1_dev/js/tinymce/init.js" %}"></script>
+{% endblock content %}

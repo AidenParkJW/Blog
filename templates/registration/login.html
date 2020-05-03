@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/login.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="loginContainer">
+    {% if form.errors %}
+    <div id="errorMsg" style="margin: 0px 20px">
+        <p>Wrong! Please correct the error(s) below.</p>
+        {{ form.errors }}
+    </div>
+    <div class="space-h10"></div>
+    {% endif %}
+
+    {% load socialaccount %}
+    <form action="." method="post">{% csrf_token%}
+        <div class="row">
+            <h2 style="text-align:center">Login with Social Media or Manually</h2>
+            <div class="vl">
+                <span class="vl-innertext">or</span>
+            </div>
+
+            <div class="col">
+                <!--
+                <a href="#" onclick="alert('preparing...');" class="fb btn">
+                    <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                </a>
+                <a href="#" onclick="alert('preparing...');" class="twitter btn">
+                    <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+                </a>
+                -->
+                <a href="{% provider_login_url 'kakao' %}?next={% url 'callback' %}" onclick="UI.openAuthKakao(this.href);return false;" class="kakao btn">
+                    <i class="fa fa-comment kakaoIcon"></i><span class="pipe">|</span> Login with Kakao
+                </a>
+                <a href="{% provider_login_url 'naver' %}?next={% url 'callback' %}" onclick="UI.openAuthNaver(this.href);return false;" class="naver btn">
+                    <div class="naverIcon">N</div><span class="pipe">|</span> Login with NAVER
+                </a>
+                <a href="{% provider_login_url 'google' %}?next={% url 'callback' %}" onclick="UI.openAuthGoogle(this.href);return false;" class="google btn">
+                    <i class="fa fa-google googleIcon"></i><span class="pipe">|</span> Login with Google+
+                </a>
+            </div>
+            
+            <div class="col">
+                <div class="hide-md-lg">
+                    <p>Or sign in manually:</p>
+                </div>
+                {{ form.username }}
+                {{ form.password }}
+                <input type="submit" value="Login"/>
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="loginContainerBottom">
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'register' %}" style="color:white" class="btn">Sign up</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'password_reset' %}" style="color:white" class="btn">Forgot password?</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

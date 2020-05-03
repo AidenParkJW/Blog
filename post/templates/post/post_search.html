@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/post/search.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="searchContainer">
+    <form id="postSearchForm" action="{% url 'post:search' %}" method="post">{% csrf_token %}
+        {{ form.search_word }}
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    
+    <div class="searchResult">
+        <div class="space-h10"></div>
+        <h2>Search Word "{{ search_word }}" : {{ count }} results.</h2>
+    
+        {% for post in posts %}
+        <div class="rsltRow  {% cycle "row1" "row2" %}">
+            <div class="rsltTtl">
+                <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
+            </div>
+            <div class="rlstCont">
+                <a href="{{ post.get_absolute_url }}">{{ post.post_content|striptags|truncatechars:200|linebreaksbr }}</a>
+            </div>
+            <div class="rlstInfo">
+                {{ post.menu.menu_name }} | {{ post.post_crte_dt|date:"Y.m.d" }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    {% include "post/post_pageNavi.html" %}
+</div>
+{% endblock content %}

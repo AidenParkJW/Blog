@@ -1,0 +1,530 @@
+@charset "utf-8";
+
+/******************************************************** 
+ * GLOBAL 
+ ********************************************************/
+ 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #4C4C4C;
+    margin: 0px;
+}
+
+/* LINKS */
+
+a:link,
+a:visited {
+    color: #4C4C4C;  /* #447e9b */
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    color: #036;
+    text-decoration: underline;
+}
+
+a img {
+    border: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+#errorMsg {
+    border-radius: 5px;
+    padding: 5px 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.textDel {
+    text-decoration: line-through !important;
+}
+
+.noneDeco {
+    text-decoration: none !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+/******************************************************** 
+ * HEADER 
+ ********************************************************/
+ 
+div#header {
+    width: 100%;
+    display: table;
+    background: #eee;
+    padding: 20px 0px 5px 0px;
+}
+
+#header .title {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#header .welcome {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 20px;
+    /*color: #ffc;*/
+    font-weight: normal;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+#header .title a:link, 
+#header .title a:visited {
+    color: #000000;
+    text-decoration: none;
+    opacity: 0.75;
+}
+
+#header .welcome a:link,
+#header .welcome a:visited {
+    color: #4C4C4C;
+    border-bottom: 1px solid rgba(76, 76, 76, 1);
+}
+
+#header .welcome a:focus,
+#header .welcome a:hover {
+    color: #79aec8;
+}
+
+
+/******************************************************** 
+ * ToolBar 
+ ********************************************************/
+ 
+div#toolBar {
+    width: 100%;
+    background-color: #555;
+    box-shadow: 5px 5px 5px #999;
+    padding-bottom: 0px;
+}
+
+.sticky {
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + #mainContainer {
+    padding-top: 40px;
+}
+
+#toolBar .hScrollContainer {
+    width: 100%;
+    height: 3px;
+    background-color: #eee;
+}
+
+#toolBar .hScrollContainer #hScrollBar {
+    width: 0px;
+    height: 3px;
+    background-color: #55ACEE;
+}
+
+#toolBar .iconBar {
+    width: 100%;
+    padding: 0px 0px;
+    display: table;
+}
+
+#toolBar .iconBar div {
+    display: table-cell;
+}
+
+#toolBar .iconBar #topNavi {
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+}
+
+#topNavi,
+#topNavi a:link,
+#topNavi a:visited {
+    color: #B8B8B8;
+    text-decoration: none;
+}
+
+#topNavi a:focus,
+#topNavi a:hover {
+    color: white;
+}
+
+#toolBar .iconBar .searchBar {
+    min-width: 250px;
+    text-align: right;
+    padding: 0px 10px 0px 10px;
+}
+
+#toolBar .iconBar .searchBar input[type=text] {
+    width: 100px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('/static/images/searchicon.png');
+    background-repeat: no-repeat;
+    background-position: 5px 2px; 
+    padding: 5px 15px 5px 35px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin: 0px;
+}
+
+#toolBar .iconBar .searchBar input[type=text]:focus {
+    width:100%
+}
+
+/******************************************************** 
+ * Main Cantainer 
+ ********************************************************/
+
+div#mainContainer {
+    min-height: 600px;
+    overflow: hidden;   /* for menuNavi */
+    display: flex;
+}
+
+/******************************************************** 
+ * CONTENT 
+ ********************************************************/
+ 
+div#content {
+    margin: 20px 20px 20px 20px;
+    width: 100%;
+    border: 0px dashed #ccc;
+}
+
+/******************************************************** 
+ * MENU 
+ ********************************************************/
+ 
+div#menuNavi {
+    position: relative;
+    right: -320px;
+    width: 320px;
+    transition: 0.7s;
+    /*z-index: 1;*/
+    display: none;
+}
+
+.menuNaviOpen {
+    right: 0px !important;
+}
+
+#menuNavi .menuBox {
+    background-color: #f9f9f9;
+    border: 0px solid black;
+}
+
+.menuBox .closeBtn {
+    margin: 0px 10px;
+    font-size: 34px;
+}
+
+.menuBox .closeBtn:focus,
+.menuBox .closeBtn:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.menuBox #menuTop {
+    height: 20px;
+}
+
+.menuBox #menuTree {
+    min-height: 500px;
+}
+
+.menuBox #menuBottom {
+    height: 50px;
+}
+
+#menuTree div {
+    font-size: 12px;
+    padding: 4px 0px;
+    border: 0px solid black;
+}
+
+#menuTree span {
+    font-weight: bold;
+}
+
+#menuTree div a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+#menuTree div a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}
+#menuTree div.menuLvl01 {
+    padding-left: 20px;
+}
+
+#menuTree div.menuLvl02 {
+    padding-left: 40px;
+}
+
+/******************************************************** 
+ * FOOTER 
+ ********************************************************/
+div#footer {
+    margin: auto;
+    width: 95%;
+    height: 20px;
+    padding: 5px 0px;
+    background: #FFF;
+    text-align: center;
+    border-top:1px solid #ccc;
+    font-size: 12px;
+}
+
+@media screen and (max-height: 500px) {
+  div#footer {
+     /*display: none;*/
+  }
+}
+
+
+/******************************************************** 
+ * TOP Button
+ ********************************************************/
+
+#topBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#topBtn:hover {
+    background-color: #555;
+}
+
+/******************************************************** 
+ * Icon Button
+ ********************************************************/
+ 
+.iconBtn {
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.iconBtn:hover {
+    background-color: black;
+}
+
+
+/******************************************************** 
+ * Error Page
+ ********************************************************/
+.errorContainer {
+    border: 2px solid #ccc;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 50px auto;
+    width: 600px;
+}
+
+.errorContainer span {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+/******************************************************** 
+ * Message Container
+ ********************************************************/
+.messageContainer {
+    display: flex;
+}
+
+.messageBox {
+    border: 2px solid #ccc;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 50px auto;
+    min-width: 600px;
+    display: inline-block;
+}
+
+.messageBox span {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+
+/******************************************************** 
+ * File up/download
+ ********************************************************/
+div#fileContainer {
+    border: 2px solid #bbbbbb;
+    border-radius: 5px;
+}
+
+div#fileBox {
+    padding: 3px;
+    height: 120px;
+    overflow: auto;
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.emptyFileBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cccccc;
+}
+
+.hideFileBox {
+    display: none !important;
+}
+
+div#emptyMsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    border: 2px dashed #dddddd;
+    border-radius: 5px;
+}
+
+div#emptyMsg .uploadIcon {
+    margin-bottom: 5px;
+    font-size: 38px;
+}
+
+div#emptyMsg .uploadMsg {
+    font-size: 14px;
+}
+
+.hideMsg {
+    display: none !important;
+}
+
+.fileRow {
+    font-size: 12px;
+}
+
+.fileRow:hover {
+    font-weight: bold;
+}
+
+
+.fileRow > div {
+    padding: 5px;
+}
+
+.fileRow .fileSts {
+    font-size: 16px;
+    color: dodgerblue;
+    padding: 1px 0px 0px 3px;
+    width: 14px;
+}
+
+.fileRow .fileDel {
+    padding: 0px 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    align-self: center;
+}
+
+.fileRow:nth-child(odd) {
+    background: #e9e9e9;
+}
+
+.fileRow:nth-child(even) {
+    background: #f5f5f5;
+}
+
+div#fileStatus {
+    /*background-color: #f44336;*/
+    background-color: #bbbbbb;
+    border-radius: 0px 0px 3px 3px;
+    font-weight: bold;
+}
+
+div#fileStatus:hover {
+    opacity: 0.8;
+}
+
+div#fileStatus > div {
+    padding: 5px 10px;
+}
+
+div#progressBar {
+    position: absolute;
+    border-radius: 5px;
+    background-color: #2196F3;
+    text-align: center;
+    font-weight: bold;
+    transition: width .3s;
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/******************************************************** 
+ * ETC
+ ********************************************************/
+.space-h10 {
+    height: 10px;
+}
+
+.space-w10 {
+    width: 10px;
+    display: inline-block;
+}
+
+.box {
+    display: inline-flex;
+    width: 100%;
+}
+
+.spacer {
+    display: block;
+    -ms-flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Change Completed{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/register.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="messageContainer">
+    <div class="messageBox">
+        <p><span>Profile change completed.</span></p>
+        <p>Your profile has been changed successfully.</p>
+        <p><a href="{% url 'home' %}">Go to Home</a></p>
+    </div>
+</div>
+{% endblock content %}

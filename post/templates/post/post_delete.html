@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Post Delete{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/post/post.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="postDeleteContainer">
+    <form action="." method="post">{% csrf_token %}
+        <h1>Post Delete</h1>
+        <hr/>
+        <p>Are you sure you want to delete "{{ post.post_title }}"?</p>
+        
+        <div class="clearfix">
+            <button type="button" class="cancelBtn" onclick="location.href='{{ post.get_absolute_url }}'">Cancel</button>
+            <button type="submit" class="submitBtn">Confirm</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+    <div class="pageNavi">
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a href="javascript:void(0)" onclick="UI.movePage({{ page_obj.previous_page_number }});">&laquo;</a>
+            {% else %}
+            <a href="javascript:void(0)" class="inactive">&laquo;</a>
+            {% endif %}
+            
+            {% for pageNo in paginator.page_range %}
+                {% if pageNo == page_obj.number %}
+                <a href="javascript:void(0)" onclick="UI.movePage({{ pageNo }});" class="active">{{ pageNo }}</a>
+                {% else %}
+                <a href="javascript:void(0)" onclick="UI.movePage({{ pageNo }});">{{ pageNo }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <a href="javascript:void(0)" onclick="UI.movePage({{ page_obj.next_page_number }});">&raquo;</a>
+            {% else %}
+            <a href="javascript:void(0)" class="inactive">&raquo;</a>
+            {% endif %}
+        </div>
+    </div>

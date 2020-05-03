@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Change{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/register.css" %}{% endblock extraStyle %}
+
+{% block content %}
+<div class="profileContainer">
+    {% if form.errors %}
+    <div id="errorMsg">
+        <p>Wrong! Please correct the error(s) below.</p>
+        {{ form.errors }}
+    </div>
+    <div class="space-h10"></div>
+    {% endif %}
+        
+    <form action="." method="post">{% csrf_token %}
+        <h1>Profile change</h1>
+        <hr/>
+        <label for="id_username"><b>ID</b></label>
+        {{ form.username }}
+        
+        <label for="id_password"><b>Password</b></label></br>
+        {{ form.password.help_text|safe }}</br></br>
+        
+        <label for="id_email"><b>Email</b></label>
+        {{ form.email }}
+        
+        <label for="id_first_name"><b>Name</b></label>
+        {{ form.first_name }}
+        
+        <div class="clearfix">
+            <button type="button" class="cancelBtn" onclick="history.back()">Cancel</button>
+            <button type="submit" class="submitBtn">Save</button>
+            <button type="button" class="withdrawBtn" onclick="location.href='{% url 'withdraw' %}'">Withdrawal</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
