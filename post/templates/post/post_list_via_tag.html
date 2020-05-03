@@ -36,21 +36,22 @@
     {% with postNo|add:forloop.counter0|sub:1 as no %}
     {% if isBlogStyle == "true" %}
     <div class="postRowBlogStyle">
-        <div class="postTitle">
+        <div class="postTitle box">
             <div class="postNo">{{ totalCnt|sub:no }}.</div>
             <a href="{{ post.get_absolute_url }}" class="{{ post.post_isEnabled|yesno:",textDel" }}">{{ post.post_title|striptags }}</a>
-        </div>
-        <div class="postLine {% getPostFlagStyle post.post_crte_dt post.post_mdfy_dt %}""></div>
-        <div class="postInfo">
-            <div class="postDate">
-                {{ post.post_crte_dt|date:"Y.m.d" }}
-            </div>
+            <div class="spacer"></div>
             <div class="postComment">
                 <i class="fa fa-commenting-o"></i> <span class="disqus-comment-count" data-disqus-identifier="{{ post.post_uid }}"></span>
             </div>
         </div>
+        <div class="postLine {% getPostFlagStyle post.post_crte_dt post.post_mdfy_dt %}""></div>
         <div class="postContent">
             {{ post.post_content|striptags|truncatechars:200|linebreaksbr }}
+        </div>
+        <div class="postInfo">
+            <div class="postDate">
+                {{ post.post_crte_dt|date:"Y.m.d" }}
+            </div>
         </div>
     </div>
     {% else %}
