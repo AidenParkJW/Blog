@@ -27,7 +27,7 @@
             {{ post.post_crte_user.first_name }}
         </div>
         <div class="download">
-            <i class="fa fa-download"> Download</i>
+            <a href="#fileContainer"><i class="fa fa-download"> Download</i></a>
         </div>
     </div>
     
@@ -51,16 +51,21 @@
             {% if user.id == post.post_crte_user_id or user.is_superuser %}
             <a href="{{ post.get_update_url }}"><i class="fa fa-edit"> Edit</i></a>
             <span class="pipe">|</span>
-            <a href="{{ post.get_delete_url }}"><i class="fa fa-trash-o"> Delete</i></a>
+            <a href="{{ post.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a>
             <span class="pipe">|</span>
             {% endif %}
             <a href="{{ post.get_list_url }}"><i class="fa fa-bars"> List</i></a>
         </div>
     </div>
+
+    {% include "file.html" with content_type=post.content_type.id object_uid=post.post_uid isEditable=isEditable only %}
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
     
     <div class="otherPosts">
     {% for other in other_posts %}
-        <div class="otherRow {% cycle "row1" "row2" %}">
+        <div class="box otherRow">
             <div class="otherTitle">
                 <a href="{{ other.get_absolute_url }}">
                 {% if other.post_uid == post.post_uid %}
@@ -77,7 +82,6 @@
     {% endfor %}
     </div>
     
-    <div class="space-h10"></div>
     <div class="space-h10"></div>
     
     {% load tagging_tags %}

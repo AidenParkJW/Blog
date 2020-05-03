@@ -52,8 +52,8 @@ var UI =
         }, 0);
         
         // call ajax
-        UT.ajax("POST", "/menu/jsonMenuLV/", null,
-                function(result, status, xht)
+        UT.ajax("POST", "/menu/load/", null,
+                function(result, status, xhr)
                 {
                     // last objects remove
                     $("#menuTree").empty();
@@ -82,6 +82,14 @@ var UI =
                         }
                         
                         $("#menuTree").append(_div);
+                        
+                        // Adding margin between each different level menu.
+                        if (UT.isNotEmpty(array[index + 1]) && data.level > array[index + 1].level)
+                        {
+                            var _gap = document.createElement("div");
+                            _gap.className = "space-h10";
+                            $("#menuTree").append(_gap);
+                        }
                     });
                 });
     },
@@ -196,4 +204,23 @@ var UI =
             _pop.moveTo(_left, _top);
         }
     },
+    
+    getForm : function(element)
+    {
+        if (element != null && element.parentElement != null)
+        {
+            if (element.parentElement.tagName == "FORM")
+            {
+                return element.parentElement;
+            }
+            else
+            {
+                return UI.getForm(element.parentElement);
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

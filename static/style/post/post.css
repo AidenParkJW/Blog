@@ -86,6 +86,7 @@ input:checked + .slider:before {
 .postRowBlogStyle .postTitle {
     font-size: 17px;
     font-weight: bold;
+    align-items: flex-end;
 }
 
 .postRowBlogStyle .postTitle .postNo {
@@ -97,45 +98,42 @@ input:checked + .slider:before {
 /*     text-decoration: none; */
 }
 
-.postRowBlogStyle .postLine {
-    margin: 3px 0px;
-    height: 2.4px;
-    background-color: #999999;
-    opacity: 0.8;
-}
-
-.postRowBlogStyle .postNew {
-    background-color: #72c02c;
-}
-
-.postRowBlogStyle .postUpd {
-    background-color: #2196F3;
-}
-
-.postRowBlogStyle .postInfo {
-    color: #777777;
-    font-size: 13px;
-    margin: 0px 0px 15px 0px;
-    display: flex;
-}
-
-.postRowBlogStyle .postInfo .postDate {
-    width: calc(100% - 60px);
-    align-self: flex-end;
-}
-
-.postRowBlogStyle .postInfo .postComment {
+.postRowBlogStyle .postTitle .postComment {
     width: 60px;
     text-align: right;
 }
 
-.postRowBlogStyle .postInfo .postComment > i {
-    font-size: 18px;
+.postRowBlogStyle .postLine {
+    margin: 3px 0px;
+    height: 0px;
+    border: 2px dotted #999999;
+}
+
+.postRowBlogStyle .postNew {
+    border:2px dotted #72c02c;
+}
+
+.postRowBlogStyle .postUpd {
+    border:2px dotted #2196F3;
 }
 
 .postRowBlogStyle .postContent {
-
+    padding: 10px;
+    background-color: #f5f5f5;
 }
+
+.postRowBlogStyle .postInfo {
+    color: #555555;
+    font-size: 12px;
+}
+
+.postRowBlogStyle .postInfo .postDate {
+    padding: 5px 10px;
+    text-align: right;
+    background-color: #eeeeee;
+    border-radius: 0px 0px 5px 5px;
+}
+
 
 /******************************************************** 
  * Post List Board style
@@ -301,7 +299,7 @@ input:checked + .slider:before {
 }
 
 .title .postTitle {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding: 0px 0px;
     width: calc(100% - 50px);
@@ -356,37 +354,38 @@ input:checked + .slider:before {
  * The Other Post List
  ********************************************************/
 .postDetailContainer .otherPosts {
-    padding: 3px;
-    margin: auto;
-    border: 2px solid #ddd;
+    padding: 3px 0px;
+    border-top: 4px solid #bbb;
+    border-bottom: 4px solid #bbb;
     border-radius: 5px;
-    overflow: auto;
 }
 
 .otherPosts .otherRow{
-    display: table;
+    
 }
 
-.otherPosts .otherRow:hover a {
-    /* text-decoration: underline; */
+.otherPosts .otherRow:hover {
+    font-weight: bold;
 }
 
-.otherPosts .row1 {
-    background-color: #e9e9e9;
+.otherRow:nth-child(odd) {
+    background: #e9e9e9;
 }
 
-.otherPosts .row2 {
-    background-color: #f5f5f5;
+.otherRow:nth-child(even) {
+    background: #f5f5f5;
 }
 
 .otherPosts .otherRow .otherTitle{
-    display: table-cell;
     width: 100%;
     padding: 5px 5px 5px 10px;
 }
 
+.otherPosts .otherRow .otherTitle > a {
+    text-decoration: none;
+}
+
 .otherPosts .otherRow .otherDate{
-    display: table-cell;
     padding: 5px 10px 5px 5px;
 }
 
@@ -464,7 +463,7 @@ input:checked + .slider:before {
 }
 
 .postFormContainer input[type=checkbox] {
-    vertical-align: sub;
+    vertical-align: middle;
 }
 
 .postFormContainer hr {
@@ -493,11 +492,11 @@ input:checked + .slider:before {
     opacity:1;
 }
 
-.postFormContainer .cancelbtn {
+.postFormContainer .cancelBtn {
     background-color: #f44336;
 }
 
-.postFormContainer .submitbtn {
+.postFormContainer .submitBtn {
     background-color: #4CAF50;
 }
 
@@ -507,7 +506,6 @@ input:checked + .slider:before {
     display: table;
 }
 
- 
 /******************************************************** 
  * Post Delete
  ********************************************************/
@@ -545,11 +543,11 @@ input:checked + .slider:before {
     opacity:1;
 }
 
-.postDeleteContainer .cancelbtn {
+.postDeleteContainer .cancelBtn {
     background-color: #f44336;
 }
 
-.postDeleteContainer .submitbtn {
+.postDeleteContainer .submitBtn {
     background-color: #4CAF50;
 }
 
