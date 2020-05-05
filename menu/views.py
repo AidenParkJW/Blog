@@ -1,7 +1,9 @@
-from django.views.decorators.http import require_http_methods
-from menu.models import Menu
-from django.http import JsonResponse
 from django.db.models import Count, Q
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+
+from menu.models import Menu
+
 
 # Create your ajax views here.
 class MenuAV():

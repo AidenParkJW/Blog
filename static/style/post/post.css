@@ -365,20 +365,22 @@ input:checked + .slider:before {
 }
 
 .otherPosts .otherRow:hover {
-    font-weight: bold;
+    border: 1px solid #777;
 }
 
 .otherRow:nth-child(odd) {
     background: #e9e9e9;
+    border: 1px solid #e9e9e9;
 }
 
 .otherRow:nth-child(even) {
     background: #f5f5f5;
+    border: 1px solid #f5f5f5;
 }
 
 .otherPosts .otherRow .otherTitle{
     width: 100%;
-    padding: 5px 5px 5px 10px;
+    padding: 4px 5px 4px 10px;
 }
 
 .otherPosts .otherRow .otherTitle > a {
@@ -386,7 +388,7 @@ input:checked + .slider:before {
 }
 
 .otherPosts .otherRow .otherDate{
-    padding: 5px 10px 5px 5px;
+    padding: 4px 10px 4px 5px;
 }
 
 /******************************************************** 

@@ -1,12 +1,15 @@
-from django.views.decorators.http import require_http_methods
-from django.http.response import JsonResponse, FileResponse
+from builtins import staticmethod
+from datetime import datetime, timedelta
+import os, shutil, pathlib, mimetypes
+
+from django.conf import settings
 from django.core import signing
 from django.core.files.storage import default_storage
-from django.conf import settings
-import os, shutil, pathlib, mimetypes
-from datetime import datetime, timedelta
+from django.http.response import JsonResponse, FileResponse
+from django.views.decorators.http import require_http_methods
+
 from attFile.models import AttFile
-from builtins import staticmethod
+
 
 # Create your ajax views here.
 class AttFileAV():

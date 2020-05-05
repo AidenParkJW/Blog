@@ -1,9 +1,11 @@
 from django import forms
-from post.models import Post
-from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import TextInput
-from django.core.validators import MinLengthValidator
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
+from django.forms.widgets import TextInput
+from django.utils.translation import gettext_lazy as _
+
+from post.models import Post
+
 
 class PostSearchForm(forms.Form):
     search_word = forms.CharField(label=False, required=True, max_length=20, widget=forms.TextInput(attrs={"placeholder":"Search.."}))

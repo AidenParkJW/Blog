@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
+
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.utils.text import slugify
 from tagging.fields import TagField
-from menu.models import Menu
-from django.contrib.contenttypes.fields import GenericRelation
+
 from attFile.models import AttFile
-from django.contrib.contenttypes.models import ContentType
+from menu.models import Menu
+
 
 class Post(models.Model):
     post_uid        = models.AutoField("Post UID", primary_key=True)

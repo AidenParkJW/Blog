@@ -1,16 +1,19 @@
 from __future__ import unicode_literals
-from django.core import signing
-from django.db import models
-from django.urls import reverse
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.auth.models import User
-from django.db.models.signals import pre_save, post_delete
-from django.dispatch import receiver
+
 from datetime import datetime
 import os, shutil
-from django.conf import settings
+
 from PIL import Image
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.core import signing
+from django.db import models
+from django.db.models.signals import pre_save, post_delete
+from django.dispatch import receiver
+from django.urls import reverse
+
 
 def get_thumb(uri):
     parts = uri.split(".")

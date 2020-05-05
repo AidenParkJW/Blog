@@ -1,16 +1,19 @@
-from django.core.exceptions import PermissionDenied
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+import inspect
+
+from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
 from django.urls import reverse_lazy, exceptions
+from django.utils.decorators import method_decorator
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from Blog.forms import UserProfileForm
-from allauth.socialaccount.models import SocialAccount
-import inspect
+
 
 class HomeView(TemplateView):
     template_name = "home.html"

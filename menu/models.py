@@ -1,9 +1,12 @@
 from __future__ import unicode_literals
-from django.db import models
+
+import re
+
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
-import re
+
 
 class Menu(MPTTModel):
     menu_uid        = models.AutoField("Menu UID", primary_key=True)
@@ -40,9 +43,9 @@ class Menu(MPTTModel):
             
             for m in ancestors:
                 if m.menu_url is not None:
-                    menu_list.append('<a href="{}">{}</a>'.format(m.menu_url, m.menu_name))
+                    menu_list.append("<a href='{}'>{}</a>".format(m.menu_url, m.menu_name))
                 else:
-                    menu_list.append('{}'.format(m.menu_name))
+                    menu_list.append("{}".format(m.menu_name))
         
         return " › ".join(menu_list)
     
