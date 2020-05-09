@@ -106,7 +106,7 @@ class PostDV(DetailView):
     # override
     def get_context_data(self, **kwargs):
         #print(inspect.stack()[0][3])
-        qs = Post.objects.select_related("menu").filter(menu=self.object.menu.menu_uid)
+        qs = Post.objects.select_related("menu").filter(menu=self.object.menu)
         
         # If is not superuser.
         if not self.request.user.is_superuser:
@@ -146,6 +146,7 @@ class PostEV(UpdateView):
     def get_object(self, queryset=None):
         post_uid = self.kwargs.get("post_uid", None)
         
+        # When coming via postCV
         if post_uid is None:
             try:
                 post = Post()
@@ -161,7 +162,8 @@ class PostEV(UpdateView):
                 raise Http404("Menu does not exist")
         
             return post
-            
+        
+        # When coming via postUV
         else:
             try:
                 post = Post.objects.select_related("menu").select_related("post_crte_user").get(post_uid=post_uid)
@@ -254,7 +256,7 @@ class PostEV(UpdateView):
         ''' 
         Call order
         0. view.is_valid()
-        1. view.form_valid
+        1. view.form_valid or view.form_invalid
         2. form.save
         3. model.save
         
@@ -271,7 +273,7 @@ class PostRV(DeleteView):
     template_name = "post/post_delete.html"
     success_url = None
 
-    #override
+    # override
     def get_object(self, queryset=None):
         try:
             post = Post.objects.select_related("menu").select_related("post_crte_user").get(post_uid=self.kwargs["post_uid"])

@@ -17,8 +17,8 @@ class Post(models.Model):
     post_title      = models.CharField("Post Title", max_length=100)
     post_slug       = models.SlugField("Post Slug", max_length=100, unique=False, allow_unicode=True, help_text="one word for title alias.")
     post_content    = models.TextField("Post Content")
-    post_views      = models.PositiveIntegerField("Views", default=0)
-    post_isEnabled  = models.BooleanField("Enabled", default=True)
+    post_views      = models.PositiveIntegerField("Post Views", default=0)
+    post_isEnabled  = models.BooleanField("Post Enabled", default=True)
     post_tag        = TagField()
     # https://docs.djangoproject.com/en/3.0/ref/contrib/contenttypes/#reverse-generic-relations
     # AttFile.objects.filter(post__post_uid=_post.post_uid)

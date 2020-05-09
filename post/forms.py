@@ -43,7 +43,7 @@ class PostForm(forms.ModelForm):
         Below script is correct but not working. because "MinLengthValidator" can't check null or blank.
         so I added validation in clean function.
         '''
-        _post_content.validators.append(MinLengthValidator(1, message="This field is required."))
+        _post_content.validators.append(MinLengthValidator(1, message=_("This field is required.")))
 
         # if not superuser. Don't allow modification 
         if not request.user.is_superuser:
