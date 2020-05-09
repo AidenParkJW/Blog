@@ -46,9 +46,10 @@ INSTALLED_APPS = [
     # tree
     'mptt',
     
-    'attFile.apps.AttFileConfig',
-    'post.apps.PostConfig',
     'menu.apps.MenuConfig',
+    'post.apps.PostConfig',
+    'page.apps.PageConfig',
+    'attFile.apps.AttFileConfig',
     'tagging.apps.TaggingConfig',
     'disqus',
     
