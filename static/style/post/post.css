@@ -334,9 +334,6 @@ input:checked + .slider:before {
 
 .postDetailContainer .postContent {
     min-height: 600px;
-/*     overflow: auto; */
-/*     word-wrap: break-word; */
-/*     white-space: pre; */
 }
 
 .postDetailContainer .buttonBox {
