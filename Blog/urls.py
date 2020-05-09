@@ -52,9 +52,10 @@ urlpatterns = [
     path("accounts/callback/"                       , TemplateView.as_view(template_name="registration/callback.html"), name="callback"),
 
     # The App Pages
-    path("post/", include("post.urls")),
-    path("menu/", include("menu.urls")),
-    path("attFile/", include("attFile.urls")),
+    path("menu/"    , include("menu.urls")),
+    path("post/"    , include("post.urls")),
+    path("page/"    , include("page.urls")),
+    path("attFile/" , include("attFile.urls")),
     
     # for Static file
     re_path(r"^static/(?P<path>.*)", serve, kwargs={"insecure":True})
