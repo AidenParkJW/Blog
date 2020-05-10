@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.files.base import ContentFile
 from django.db.models import Q
+from django.db.models.signals import post_save
 from django.dispatch.dispatcher import Signal
 from django.http.response import Http404
 from django.shortcuts import redirect
@@ -16,8 +17,6 @@ from attFile.models import AttFile
 from menu.models import Menu
 from page.forms import PageForm
 from page.models import Page, updateIsEnabled
-from django.db.models.signals import post_save
-
 
 
 # Detail View
