@@ -1,5 +1,5 @@
 tinymce.init({
-    selector: "textarea#id_post_content",
+    selector: "textarea",
     //language: "ko_KR",
     min_height: 700,
     paste_data_images: true,
