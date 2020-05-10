@@ -79,20 +79,26 @@ def createThumbnail(sender, **kwargs):
             if ExifTags.TAGS[orientation] == "Orientation":
                 break
         
-        if "_getexif" in dir(img):
-            if "items" in dir(img._getexif()):
-                exif = dict(img._getexif().items())
+        try:
+            if "_getexif" in dir(img):
+                if "items" in dir(img._getexif()):
+                    exif = dict(img._getexif().items())
+                    
+                    if exif[orientation] == 3:
+                        img = img.rotate(180, expand=True)
+                        
+                    elif exif[orientation] == 6:
+                        img = img.rotate(270, expand=True)
+                        
+                    elif exif[orientation] == 8:
+                        img = img.rotate(90, expand=True)
+        except:
+            pass
         
-                if exif[orientation] == 3:
-                    img = img.rotate(180, expand=True)
-                    
-                elif exif[orientation] == 6:
-                    img = img.rotate(270, expand=True)
-                    
-                elif exif[orientation] == 8:
-                    img = img.rotate(90, expand=True)
-
-        size = (512, 512)
+        #size = (512, 512)
+        _w = int(img.size[0] / 8)
+        _h = int(img.size[1] / 8)
+        size = (_w, _h)
         img.thumbnail(size, Image.ANTIALIAS)
         img = img.convert("RGB")
         img.save(attFile.thumb_path)

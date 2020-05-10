@@ -50,6 +50,9 @@ class AttFileAV():
                 # save new attached file
                 _totalSize = 0
                 _tempDir = os.path.join(settings.UPLOAD_TEMP, request.META.get("HTTP_X_CSRFTOKEN"))
+                
+                # Delete existing temporary directory
+                shutil.rmtree(_tempDir, ignore_errors=True)
                 _insFiles = request.FILES.getlist("insFiles")   # inMemoryFiles
                 
                 for _insFile in _insFiles:
