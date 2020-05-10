@@ -10,15 +10,26 @@
     <div class="messageBox">
         <p><span>Logged out.</span></p>
         <p>Thanks for spending some quality time with the Web site today.</p>
-        <p>It moves automatically after 5 seconds.</p>
+        <p>It moves automatically after <i id="sec">5</i> seconds.</p>
         <p><a href="{% url 'login' %}" id="goHomeLink">Log in again</a></p>
     </div>
 </div>
 
 <script>
-setTimeout(function() 
+var _elSec = document.getElementById("sec");
+var _elLink = document.getElementById("goHomeLink");
+
+function autoMove()
 {
-    document.getElementById("goHomeLink").click();
-}, 5000);
+    _elSec.innerText = UT.toNumber(_elSec.innerText) - 1;
+    
+    if (UT.toNumber(_elSec.innerText) == 0)
+    {
+        clearInterval(_timer);
+        _elLink.click();
+    }
+}
+
+var _timer = setInterval(autoMove, 1000);
 </script>
 {% endblock content %}
