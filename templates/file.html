@@ -123,19 +123,18 @@ function addRow(file)
 {
     var _fileBox = document.getElementById("fileBox");
 
-    var _newRow = document.createElement("div");
-    _newRow.className = "box fileRow";
-    _fileBox.appendChild(_newRow);
+    var _fileRow = document.createElement("div");
+    _fileRow.className = "fileRow box";
+    _fileBox.appendChild(_fileRow);
     
     {% if isEditable %}
-    var _fileSts = document.createElement("div")
+    var _fileSts = document.createElement("div");
     _fileSts.className = "fileSts";
-    _fileSts.appendChild(document.createTextNode(UT.isFile(file) ? "＋" : ""));
-    _newRow.appendChild(_fileSts);
+    _fileSts.innerHTML = UT.isFile(file) ? "＋" : "&nbsp;";
+    _fileRow.appendChild(_fileSts);
     {% endif %}
     
     var _fileName = document.createElement("div");
-    
     {% if not isEditable %}
     _fileName.className = "pointer"
     _fileName.onclick = function()
@@ -143,17 +142,16 @@ function addRow(file)
                             AttFile.download(file);
                         }
     {% endif %}
-    
     _fileName.appendChild(document.createTextNode(file.name));
-    _newRow.appendChild(_fileName);
+    _fileRow.appendChild(_fileName);
     
     var _spacer = document.createElement("div");
     _spacer.className = "spacer";
-    _newRow.appendChild(_spacer);
+    _fileRow.appendChild(_spacer);
     
     var _fileSize = document.createElement("div");
     _fileSize.appendChild(document.createTextNode(UT.formatedFileSize(file.size)));
-    _newRow.appendChild(_fileSize);
+    _fileRow.appendChild(_fileSize);
     
     {% if isEditable %}
     var _fileDel = document.createElement("a");
@@ -163,23 +161,23 @@ function addRow(file)
                         {
                             if (UT.isFile(file))
                             {
-                                _fileBox.removeChild(_newRow);
+                                _fileBox.removeChild(_fileRow);
                             }
                             else
                             {
                                 if (AttFile.isRemoved(file))
                                 {
-                                    _fileName.classList.remove("textDel");
+                                    _fileRow.classList.remove("deletedFile");
                                 }
                                 else
                                 {
-                                    _fileName.classList.add("textDel");
+                                    _fileRow.classList.add("deletedFile");
                                 }
                             }
                             
                             AttFile.remove(file);
                         };
-    _newRow.appendChild(_fileDel);
+    _fileRow.appendChild(_fileDel);
     {% endif %}
     
     AttFile.add(file);

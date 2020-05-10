@@ -3,14 +3,14 @@ from __future__ import unicode_literals
 from datetime import datetime
 import os, shutil
 
-from PIL import Image
+from PIL import Image, ExifTags
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core import signing
 from django.db import models
-from django.db.models.signals import pre_save, post_delete
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.urls import reverse
 
@@ -69,20 +69,39 @@ class AttFile(models.Model):
     
     
 # https://docs.djangoproject.com/en/3.0/topics/signals/#module-django.dispatch
-@receiver(pre_save, sender=AttFile)
+@receiver(post_save, sender=AttFile)
 def createThumbnail(sender, **kwargs):
     attFile = kwargs.get("instance")
     if attFile.att_isImage and not os.path.exists(attFile.thumb_path):
         img = Image.open(attFile.att_file.path)
-        size = (128, 128)
+        
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == "Orientation":
+                break
+        
+        if "_getexif" in dir(img):
+            if "items" in dir(img._getexif()):
+                exif = dict(img._getexif().items())
+        
+                if exif[orientation] == 3:
+                    img = img.rotate(180, expand=True)
+                    
+                elif exif[orientation] == 6:
+                    img = img.rotate(270, expand=True)
+                    
+                elif exif[orientation] == 8:
+                    img = img.rotate(90, expand=True)
+
+        size = (512, 512)
         img.thumbnail(size, Image.ANTIALIAS)
         img = img.convert("RGB")
         img.save(attFile.thumb_path)
         
-#         background = Image.new("RGB", size, (255, 255, 255, 0))
-#         background.paste(img, (int((size[0] -img.size[0]) / 2), int((size[1] - img.size[1]) / 2)))
-#         background.save(attFile.thumb_path, "JPEG")
-
+        '''
+        background = Image.new("RGB", size, (255, 255, 255, 0))
+        background.paste(img, (int((size[0] -img.size[0]) / 2), int((size[1] - img.size[1]) / 2)))
+        background.save(attFile.thumb_path, "JPEG")
+        '''
 
 @receiver(post_delete, sender=AttFile)
 def deleteAttFile(sender, **kwargs):
@@ -92,9 +111,10 @@ def deleteAttFile(sender, **kwargs):
     # delete image's thumbnail
     if attFile.att_isImage and os.path.exists(attFile.thumb_path):
         os.remove(attFile.thumb_path)
-        
-    # https://docs.djangoproject.com/en/3.0/ref/models/fields/#django.db.models.fields.files.FieldFile.delete
-    attFile.att_file.delete(save=False)
+    
+    if os.path.exists(attFile.att_file.path):
+        # https://docs.djangoproject.com/en/3.0/ref/models/fields/#django.db.models.fields.files.FieldFile.delete
+        attFile.att_file.delete(save=False)
     
     # if parent directory is empty. delete
     if os.path.exists(_parentDir) and not os.listdir(_parentDir):

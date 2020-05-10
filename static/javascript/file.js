@@ -175,8 +175,7 @@ var AttFile = (function() {
                         return true;
                     }
                     
-                    //if (_form.checkValidity() && validatorTextArea())
-                    if (_form.checkValidity())
+                    if (_form.checkValidity() && validatorTextArea())
                     {
                         this.upload();
                     }

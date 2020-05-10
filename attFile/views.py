@@ -82,8 +82,13 @@ class AttFileAV():
                 if _result["message"] is None:
                     _delFiles = request.POST.getlist("delFiles")   # no inMemoryFiles
                     for _delFile in _delFiles:
-                        _att_uid = signing.loads(_delFile)
-                        AttFile.objects.get(att_uid=_att_uid).delete()
+                        
+                        try:
+                            _att_uid = signing.loads(_delFile)
+                            _attFile = AttFile.objects.get(att_uid=_att_uid).delete()
+                        
+                        except AttFile.DoesNotExist as e:
+                            pass
                 
                 _result["status"] = True
             

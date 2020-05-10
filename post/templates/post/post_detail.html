@@ -18,7 +18,7 @@
         </div>
     </div>
     
-    <div class="moreInfo">
+    <div class="moreInfo box">
         <div class="postWriter">
             {{ post.post_crte_dt|date:"Y.m.d H:i:s"}}
             <span class="pipe">|</span>
@@ -26,6 +26,7 @@
             <span class="pipe">|</span>
             {{ post.post_crte_user.first_name|default:post.post_crte_user.username }}
         </div>
+        <div class="spacer"></div>
         <div class="download">
             <a href="#fileContainer"><i class="fa fa-download"> Download</i></a>
         </div>
@@ -40,7 +41,7 @@
     <div class="space-h10"></div>
     <div class="space-h10"></div>
     
-    <div class="box buttonBox">
+    <div class="buttonBox box">
         <div>
             {% if user.is_active %}
             <a href="{{ post.get_create_url }}"><i class="fa fa-edit"> Write</i></a>
@@ -65,7 +66,7 @@
     
     <div class="otherPosts">
     {% for other in other_posts %}
-        <div class="box otherRow">
+        <div class="otherPost box">
             <div class="otherTitle">
                 <a href="{{ other.get_absolute_url }}">
                 {% if other.post_uid == post.post_uid %}
@@ -75,6 +76,7 @@
                 {% endif %}
                 </a>
             </div>
+            <div class="spacer"></div>
             <div class="otherDate">
                 {{ other.post_crte_dt|date:"Y.m.d" }}
             </div>

@@ -317,19 +317,16 @@ input:checked + .slider:before {
 }
 
 .postDetailContainer .moreInfo {
-    display: flex;
+    padding-top: 5px;
 }
 
 .moreInfo .postWriter {
-    padding-top: 4px;
     font-size: 12px;
-    width: calc(100% - 120px);
+    color: #aaa;
 }
 
 .moreInfo .download {
-    width: 120px;
-    text-align: right;
-    padding-top: 10px;
+
 }
 
 .postDetailContainer .postContent {
@@ -357,34 +354,31 @@ input:checked + .slider:before {
     border-radius: 5px;
 }
 
-.otherPosts .otherRow{
+.otherPosts .otherPost {
     
 }
 
-.otherPosts .otherRow:hover {
-    border: 1px solid #777;
+.otherPosts .otherPost:hover {
+    background-color: #cdcdcd;
 }
 
-.otherRow:nth-child(odd) {
-    background: #e9e9e9;
-    border: 1px solid #e9e9e9;
+.otherPost:nth-child(odd) {
+    background-color: #e9e9e9;
 }
 
-.otherRow:nth-child(even) {
-    background: #f5f5f5;
-    border: 1px solid #f5f5f5;
+.otherPost:nth-child(even) {
+    background-color: #f5f5f5;
 }
 
-.otherPosts .otherRow .otherTitle{
-    width: 100%;
+.otherPosts .otherPost .otherTitle {
     padding: 4px 5px 4px 10px;
 }
 
-.otherPosts .otherRow .otherTitle > a {
+.otherPosts .otherPost .otherTitle > a {
     text-decoration: none;
 }
 
-.otherPosts .otherRow .otherDate{
+.otherPosts .otherPost .otherDate {
     padding: 4px 10px 4px 5px;
 }
 
