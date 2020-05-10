@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Page Writing{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/page/page.css" %}{% endblock extraStyle %}
+{% block extraScript %}{% static "javascript/tinymce_5.2.1_dev/js/tinymce/tinymce.min.js" %}{% endblock extraScript %}
+
+{% block content %}
+<div class="pageFormContainer">
+    {% if form.errors %}
+    <div id="errorMsg">
+        <p>Wrong! Please correct the error(s) below.</p>
+        {{ form.errors }}
+    </div>
+    <div class="space-h10"></div>
+    {% endif %}
+    
+    <div class="otherPages">
+    {% for other in other_pages %}
+        <div class="otherPage box">
+            <div class="otherEnabled">
+                {% if other.page_isEnabled %}
+                    ●
+                {% else %}
+                    &nbsp;&nbsp;
+                {% endif %}
+            </div>
+            <div class="otherTitle">
+                <a href="{{ other.get_update_url }}">
+                {% if other.page_uid == page.page_uid %}
+                <b>{{ other.page_title|striptags }}</b>
+                {% else %}
+                {{ other.page_title|striptags }}
+                {% endif %}
+                </a>
+            </div>
+            <div class="spacer"></div>
+            <div class="otherDate">
+                {{ other.page_crte_dt|date:"Y.m.d H:i:s" }}
+                <span class="pipe">|</span>
+                {{ other.page_mdfy_dt|date:"Y.m.d H:i:s" }}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    <form action="." method="post">{% csrf_token %}
+        <label><b>{{ form.page_title.label }}</b></label>
+        {{ form.page_title }}
+        
+        <label><b>{{ form.page_content.label }}</b></label>
+        {{ form.page_content }}
+        
+        <div class="space-h10"></div>
+        <div class="space-h10"></div>
+        
+        <label><b>{{ form.page_isEnabled.label }}</b></label>
+        {{ form.page_isEnabled }}
+        
+        <div class="space-h10"></div>
+        
+        {% include "file.html" with content_type=page.content_type.id object_uid=page.page_uid isEditable=isEditable only %}
+
+        <hr/>
+        
+        <div class="clearfix">
+            <button type="button" class="cancelBtn" onclick="location.href='{{ historyBack }}'">Cancel</button>
+            <button type="submit" class="submitBtn">Save</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{% static "javascript/tinymce_5.2.1_dev/js/tinymce/init.js" %}"></script>
+{% endblock content %}

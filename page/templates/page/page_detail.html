@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.page_title|striptags }}{% endblock title %}
+
+{% load staticfiles %}
+{% block extraStyle %}{% static "style/page/page.css" %}{% endblock extraStyle %}
+{% block extraScript %}{% static "javascript/prism.js" %}{% endblock extraScript %}
+
+{% block content %}
+{% load custom_tags %}
+<div class="pageDetailContainer">
+    <div class="pageTitle">
+        {{ page.page_title|striptags }}
+    </div>
+    
+    <div class="moreInfo box">
+        <div class="pageWriter">
+            {{ page.page_crte_dt|date:"Y.m.d H:i:s"}}
+            <span class="pipe">|</span>
+            {{ page.page_mdfy_dt|date:"Y.m.d H:i:s"}}
+            <span class="pipe">|</span>
+            {{ page.page_crte_user.first_name|default:page.page_crte_user.username }}
+        </div>
+        <div class="spacer"></div>
+        <div class="buttonBox">
+            {% if user.is_superuser %}
+            <a href="{{ page.get_create_url }}"><i class="fa fa-edit"> Write</i></a>
+            <span class="pipe">|</span>
+            <a href="{{ page.get_update_url }}"><i class="fa fa-edit"> Edit</i></a>
+            <span class="pipe">|</span>
+            <a href="{{ page.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="space-h10"></div>
+    
+    {% for image in images %}
+    <div class="imageBox">
+        <a href="{{ image.image_url}}" target="_blank"><img src="{{ image.image_thumb_url}}"/></a>
+    </div>
+    {% endfor %}
+    <div class="pageContent">
+        {{ page.page_content|safe }}
+    </div>
+
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+
+    {% load disqus_tags %}
+    {% disqus_show_comments %}
+</div>
+{% endblock content %}
