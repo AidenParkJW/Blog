@@ -103,7 +103,7 @@ class PageEV(UpdateView):
         # When coming via pageUV
         else:
             try:
-                page = Page.objects.select_related("menu").select_related("page_crte_user").get(page_uid=page_uid)
+                page = Page.objects.select_related("menu").get(page_uid=page_uid)
             
             except Page.DoesNotExist as e:
                 raise Http404("Page does not exist")
@@ -186,7 +186,7 @@ class PageRV(DeleteView):
             raise PermissionDenied
         
         try:
-            page = Page.objects.select_related("menu").select_related("page_crte_user").get(page_uid=self.kwargs["page_uid"])
+            page = Page.objects.select_related("menu").get(page_uid=self.kwargs["page_uid"])
         
         except Page.DoesNotExist as e:
             raise Http404("Page does not exist")
