@@ -35,13 +35,9 @@
     
     <div class="space-h10"></div>
     
-    {% for image in images %}
-    <div class="imageBox">
-        <a href="{{ image.image_url}}" target="_blank"><img src="{{ image.image_thumb_url}}" alt="{{ image.att_name }}"/></a>
-    </div>
-    {% endfor %}
-    
     <div class="pageContent">
+        {% include "slide.html" with images=images only %}
+        
         {{ page.page_content|safe }}
     </div>
 
