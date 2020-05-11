@@ -67,7 +67,7 @@ class PostLV(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         #print(inspect.stack()[0][3])
         context = ListView.get_context_data(self, **kwargs)
-        context["menu_paths"] = self.__menu.getMenuPath()
+        context["menu_path"] = self.__menu.getMenuPath()
         context["menu_uid"] = self.__menu.menu_uid
         context["search_word"] = self.__srchWord if self.__srchWord else ""
         return context
@@ -128,7 +128,7 @@ class PostDV(DetailView):
         
         context = DetailView.get_context_data(self, **kwargs)
         context["isEditable"] = False
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         context["other_posts"] = _otherPosts
         return context
 
@@ -190,7 +190,7 @@ class PostEV(UpdateView):
     def get_context_data(self, **kwargs):
         context = UpdateView.get_context_data(self, **kwargs)
         context["isEditable"] = True
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         context["historyBack"] = self.object.get_list_url() if self.object.post_uid is None else self.object.get_absolute_url()
         return context
     
@@ -270,7 +270,7 @@ class PostRV(DeleteView):
     # override
     def get_context_data(self, **kwargs):
         context = DeleteView.get_context_data(self, **kwargs)
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         return context
 
 

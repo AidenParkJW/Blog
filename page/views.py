@@ -69,7 +69,7 @@ class PageDV(DetailView):
     # override
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         context["images"] = AttFile.objects.filter(Q(page__page_uid=self.object.page_uid) & Q(att_isImage=True))
         return context
 
@@ -121,7 +121,7 @@ class PageEV(UpdateView):
     def get_context_data(self, **kwargs):
         context = UpdateView.get_context_data(self, **kwargs)
         context["isEditable"] = True
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         context["historyBack"] = self.object.get_absolute_url()
         context["other_pages"] = Page.objects.filter(menu=self.object.menu)
         return context
@@ -198,7 +198,7 @@ class PageRV(DeleteView):
     # override
     def get_context_data(self, **kwargs):
         context = DeleteView.get_context_data(self, **kwargs)
-        context["menu_paths"] = self.object.menu.getMenuPath()
+        context["menu_path"] = self.object.menu.getMenuPath()
         return context
 
 

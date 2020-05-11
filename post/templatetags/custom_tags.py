@@ -88,8 +88,8 @@ def getMenuPath(context):
     request = context["request"]
     
     try:
-        if "menu_paths" in context:
-            _menuPath = context["menu_paths"]
+        if "menu_path" in context:
+            _menuPath = context["menu_path"]
         else:
             _menuPath = Menu.objects.get(menu_url=request.path).getMenuPath()
     except Menu.DoesNotExist as e:
