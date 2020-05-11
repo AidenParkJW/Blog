@@ -1,9 +1,5 @@
-import os, shutil, pathlib, mimetypes, inspect
-
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.files.base import ContentFile
 from django.db.models import Q, F
 from django.http.response import Http404
 from django.shortcuts import redirect
@@ -14,6 +10,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from tagging.views import TaggedObjectList
 
 from attFile.models import AttFile
+from attFile.views import AttFileNV
 from menu.models import Menu
 from post.forms import PostForm
 from post.forms import PostSearchForm
@@ -141,6 +138,7 @@ class PostDV(DetailView):
 class PostEV(UpdateView):
     form_class = PostForm
     template_name = "post/post_form.html"
+    attFileNV = AttFileNV()
     
     # override
     def get_object(self, queryset=None):
@@ -211,9 +209,8 @@ class PostEV(UpdateView):
             form.errors[form.fields[field].label] = form.errors[field]
             del form.errors[field]
         
-        # Deleting temporary directory
-        _tempDir = os.path.join(settings.UPLOAD_TEMP, self.request.META.get("CSRF_COOKIE"))
-        shutil.rmtree(_tempDir, ignore_errors=True)
+        # Delete temporary directory
+        self.attFileNV.rmTemp(self)
     
         return UpdateView.form_invalid(self, form)
     
@@ -227,31 +224,8 @@ class PostEV(UpdateView):
         
         self.object = form.save()
         
-        # If there is an attachment.
-        _tempDir = os.path.join(settings.UPLOAD_TEMP, self.request.META.get("CSRF_COOKIE"))
-        if os.path.exists(_tempDir):
-            for _file in pathlib.Path(_tempDir).iterdir():
-                attFile = AttFile()
-                attFile.att_name        = _file.name
-                '''
-                https://docs.python.org/3/library/mimetypes.html?highlight=mimetypes#mimetypes.guess_type
-                The return value is a tuple (type, encoding)
-                '''
-                _mime = mimetypes.guess_type(_file.name)[0]
-                attFile.att_isImage     = (_mime is not None and _mime.startswith("image/"))
-                attFile.att_desc        = None
-                attFile.content_object  = self.object
-                attFile.att_crte_user   = self.request.user
-                attFile.att_mdfy_user   = self.request.user
-
-                # With closes properly also on exceptions
-                with open(_file, "rb") as fh:
-                    # Get the content of the file, we also need to close the content file
-                    with ContentFile(fh.read()) as _fileContent:
-                        attFile.att_file.save(_file.name, _fileContent)
-            
-            # delete temporary directory
-            shutil.rmtree(_tempDir, ignore_errors=True)
+        # Save the actual AttFile object  and move uploaded file to object's directory
+        self.attFileNV.save(self)
         
         ''' 
         Call order

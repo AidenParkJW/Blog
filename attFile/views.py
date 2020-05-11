@@ -4,6 +4,7 @@ import os, shutil, pathlib, mimetypes
 
 from django.conf import settings
 from django.core import signing
+from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http.response import JsonResponse, FileResponse
 from django.views.decorators.http import require_http_methods
@@ -16,16 +17,20 @@ class AttFileAV():
     
     @staticmethod
     @require_http_methods(["POST"])
-    def load(request):
-        # Defining GenericRelation with related_query_name set allows querying from the related object. like blow
-        # AttFile.objects.filter(post__post_uid=_post.post_uid)
-        # However, I did not use it here. This is because the AttFile object should not be retrieved by any specific object.
-        qs = AttFile.objects.filter(content_type__pk=request.POST["content_type"], object_uid=request.POST["object_uid"])
+    def load(request, **kwargs):
+        if request.is_ajax():
+            # Defining GenericRelation with related_query_name set allows querying from the related object. like blow
+            # AttFile.objects.filter(post__post_uid=_post.post_uid)
+            # However, I did not use it here. This is because the AttFile object should not be retrieved by any specific object.
+            qs = AttFile.objects.filter(content_type__pk=request.POST["content_type"], object_uid=request.POST["object_uid"])
+            
+            '''
+            if you want to know actual file name, you can use this script 'os.path.basename(_attFile.att_file.name)'
+            '''
+            _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size} for _attFile in qs]
         
-        '''
-        if you want to know actual file name, you can use this script 'os.path.basename(_attFile.att_file.name)'
-        '''
-        _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size} for _attFile in qs]
+        else:
+            _attFiles = None
 
         #safe=False -> for allow non Dict type.
         #json_dumps_params={"ensure_ascii": False} -> for unicode
@@ -34,7 +39,7 @@ class AttFileAV():
     
     @staticmethod
     @require_http_methods(["POST"])
-    def upload(request):
+    def upload(request, **kwargs):
         _result = {};
         _result["status"] = False
         _result["message"] = None
@@ -150,3 +155,41 @@ class AttFileAV():
         response["Content-Type"] = content_type
         #response["Content-Length"] = _attFile.att_file.size
         return response
+
+
+# Views that cannot be called externally, called by Post and Page view
+class AttFileNV():
+
+    def save(self, instance):
+        # If there is an attachment.
+        _tempDir = os.path.join(settings.UPLOAD_TEMP, instance.request.META.get("CSRF_COOKIE"))
+        if os.path.exists(_tempDir):
+            for _file in pathlib.Path(_tempDir).iterdir():
+                attFile = AttFile()
+                attFile.att_name        = _file.name
+                '''
+                https://docs.python.org/3/library/mimetypes.html?highlight=mimetypes#mimetypes.guess_type
+                The return value is a tuple (type, encoding)
+                '''
+                _mime = mimetypes.guess_type(_file.name)[0]
+                attFile.att_isImage     = (_mime is not None and _mime.startswith("image/"))
+                attFile.att_desc        = None
+                attFile.content_object  = instance.object
+                attFile.att_crte_user   = instance.request.user
+                attFile.att_mdfy_user   = instance.request.user
+
+                # With closes properly also on exceptions
+                with open(_file, "rb") as fh:
+                    # Get the content of the file, we also need to close the content file
+                    with ContentFile(fh.read()) as _fileContent:
+                        attFile.att_file.save(_file.name, _fileContent)
+            
+            # Delete temporary directory
+            shutil.rmtree(_tempDir, ignore_errors=True)
+
+    def rmTemp(self, instance):
+        # Delete temporary directory
+        _tempDir = os.path.join(settings.UPLOAD_TEMP, instance.request.META.get("CSRF_COOKIE"))
+        shutil.rmtree(_tempDir, ignore_errors=True)
+
+

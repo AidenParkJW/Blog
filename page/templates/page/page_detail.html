@@ -37,7 +37,7 @@
     
     {% for image in images %}
     <div class="imageBox">
-        <a href="{{ image.image_url}}" target="_blank"><img src="{{ image.image_thumb_url}}"/></a>
+        <a href="{{ image.image_url}}" target="_blank"><img src="{{ image.image_thumb_url}}" alt="{{ image.att_name }}"/></a>
     </div>
     {% endfor %}
     

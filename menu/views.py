@@ -18,6 +18,7 @@ class MenuAV():
             else:
                 # retrieve only enabled menu & post
                 _menuList = [menu.getMenuDict() for menu in Menu.objects.annotate(post_cnt=Count("menu_post", filter=Q(menu_post__post_isEnabled=True))).filter(menu_isEnabled=True)]
+        
         else:
             _menuList = None
             
