@@ -157,7 +157,7 @@ class AttFileAV():
         return response
 
 
-# Views that cannot be called externally, called by Post and Page view
+# Views(none visible view) that cannot be called externally, called by Post and Page view
 class AttFileNV():
 
     def save(self, instance):

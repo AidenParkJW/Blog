@@ -33,8 +33,11 @@
     </div>
     
     <div class="space-h10"></div>
+    <div class="space-h10"></div>
     
     <div class="postContent">
+        {% include "slide.html" with images=images only %}
+        
         {{ post.post_content|safe }}
     </div>
 

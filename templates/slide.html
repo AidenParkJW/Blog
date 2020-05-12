@@ -1,5 +1,30 @@
-    {% for image in images %}
-    <div class="imageBox">
-        <a href="{{ image.image_url}}" target="_blank"><img src="{{ image.image_thumb_url}}" alt="{{ image.att_name }}"/></a>
+<div id="slide">
+    <div class="thumbImgs">
+        {% for image in images %}
+        <div class="thumbImg" onclick="Slider.view(this)">
+            <img src="{{ image.image_thumb_url}}"/>
+        </div>
+        {% endfor %}
+        
+        <a class="prevThumbBtn" onclick="Slider.prevImg()">❮</a>
+        <a class="nextThumbBtn" onclick="Slider.nextImg()">❯</a>
     </div>
-    {% endfor %}
+    
+    <div class="space-h10"></div>
+    
+    <div class="slideImgs">
+        {% for image in images %}
+        <div class="slideImg">
+            <div class="num"></div>
+            <img src="{{ image.image_url}}"/>
+            <div class="desc">{{ image.att_name }}</div>
+        </div>
+        {% endfor %}
+        
+        <a class="prevSlideBtn" onclick="Slider.prevImg()">❮</a>
+        <a class="nextSlideBtn" onclick="Slider.nextImg()">❯</a>
+    </div>
+</div>
+<script>
+Slider.init();
+</script>
