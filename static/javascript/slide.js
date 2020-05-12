@@ -6,6 +6,24 @@ var Slider = (function() {
     var _index = 0;
     
     return {
+        load : function(content_type, object_uid, callback)
+        {
+            var _data = {};
+            _data.content_type  = content_type;
+            _data.object_uid    = object_uid;
+            _data.onlyImage     = "Y";
+            
+            UT.ajax("POST", "/attFile/load/", _data,
+                    function(result, status, xhr)
+                    {
+                        if (UT.isFunction(callback))
+                        {
+                            callback.call(null, result);
+                            this.init();
+                        }
+                    }.bind(this));
+        },
+        
         init : function()
         {
             _slide = document.getElementById("slide");

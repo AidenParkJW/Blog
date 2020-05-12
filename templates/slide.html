@@ -27,4 +27,47 @@
 </div>
 <script>
 Slider.init();
+//Slider.load({{ content_type }}, {{ object_uid|default:"0" }}, makeSlider);
+
+function makeSlider(images)
+{
+    var _thumbImgs = document.querySelector("[class=thumbImgs]");
+    var _slideImgs = document.querySelector("[class=slideImgs]");
+    
+    if (UT.isArray(images))
+    {
+        images.forEach(function(image, index, array)
+        {
+            var _thumbImg = document.createElement("div");
+            _thumbImg.className = "thumbImg";
+            _thumbImg.onclick = function()
+                                {
+                                    Slider.view(_thumbImg);
+                                };
+            _thumbImgs.appendChild(_thumbImg);
+            
+            var _imgT = document.createElement("img");
+            _imgT.src = image.thumbUrl;
+            _thumbImg.appendChild(_imgT);
+            
+            var _slideImg = document.createElement("div");
+            _slideImg.className = "slideImg";
+            _slideImgs.appendChild(_slideImg);
+            
+            var _num = document.createElement("div");
+            _num.className = "num";
+            _num.innerText = UT.stringFormat("{0} / {1}", (index + 1), images.length);
+            _slideImg.appendChild(_num);
+            
+            var _imgI = document.createElement("img");
+            _imgI.src = image.imageUrl;
+            _slideImg.appendChild(_imgI);
+            
+            var _desc = document.createElement("div");
+            _desc.className = "desc";
+            _desc.innerText = image.name;
+            _slideImg.appendChild(_desc);
+        });
+    }
+}
 </script>

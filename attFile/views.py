@@ -24,10 +24,14 @@ class AttFileAV():
             # However, I did not use it here. This is because the AttFile object should not be retrieved by any specific object.
             qs = AttFile.objects.filter(content_type__pk=request.POST["content_type"], object_uid=request.POST["object_uid"])
             
+            _onlyImage = request.POST.get("onlyImage", "N")
+            if _onlyImage == "Y":
+                qs = qs.filter(att_isImage=True)
+            
             '''
             if you want to know actual file name, you can use this script 'os.path.basename(_attFile.att_file.name)'
             '''
-            _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size} for _attFile in qs]
+            _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size, "thumbUrl": _attFile.image_thumb_url, "imageUrl": _attFile.image_url} for _attFile in qs]
         
         else:
             _attFiles = None
