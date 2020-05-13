@@ -60,22 +60,18 @@ button:focus {
  
 div#header {
     width: 100%;
-    display: table;
     background: #eee;
-    padding: 20px 0px 5px 0px;
+    padding: 10px 0px 5px 0px;
 }
 
 #header .title {
-    display: table-cell;
     vertical-align: middle;
     padding-left: 20px;
-    font-weight: bold;
     font-size: 24px;
 }
 
 #header .welcome {
-    display: table-cell;
-    vertical-align: middle;
+    align-self: flex-end;
     text-align: right;
     padding-right: 20px;
     /*color: #ffc;*/

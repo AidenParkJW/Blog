@@ -398,12 +398,12 @@ input:checked + .slider:before {
 }
 
 .tagsBox .tagChip {
+    margin: 0px 3px;
     padding: 3px 10px;
     font-size: 14px;
     border-radius: 8px;
     background-color: #2196F3;
     opacity: 0.6;
-    margin: 0px 3px;
     transition: .5s;
 }
 
@@ -417,6 +417,7 @@ input:checked + .slider:before {
 }
 
 .tagsBox .tagClodeIcon {
+    margin: 0px 3px;
     padding: 3px 10px;
     font-size: 18px;
     border-radius: 8px;
@@ -427,7 +428,7 @@ input:checked + .slider:before {
 
 .tagsBox .tagClodeIcon:hover {
     color: #FFFFFF;
-    background-color: #000000;
+    background-color: #1a1a1a;
     opacity: 1;
 }
 

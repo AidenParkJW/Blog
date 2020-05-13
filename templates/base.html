@@ -18,8 +18,9 @@
     </head>
 
     <body>
-        <div id="header">
+        <div id="header" class="box">
             <div class="title"><a href="{% url 'home' %}" id="linkHome">{{ site.name }}</a></div>
+            <div class="spacer"></div>
             
             {% if user.is_active %}
             <div class="welcome">
