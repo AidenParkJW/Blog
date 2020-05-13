@@ -1571,7 +1571,11 @@
         {
           text: 'C++',
           value: 'cpp'
-        }
+        },
+        {
+            text: 'SQL',
+            value: 'sql'
+         }
       ];
       var customLanguages = Settings.getLanguages(editor);
       return customLanguages ? customLanguages : defaultLanguages;
