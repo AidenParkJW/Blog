@@ -2,7 +2,7 @@
 
 {% block title %}Withdrawal{% endblock title %}
 
-{% load staticfiles %}
+{% load static %}
 {% block extraStyle %}{% static "style/register.css" %}{% endblock extraStyle %}
 
 {% block content %}
@@ -10,11 +10,11 @@
     <form action="." method="post">{% csrf_token %}
         <h1>Withdrawal</h1>
         <hr/>
-        <p>Are you sure you want to withdraw your membership?</p>
+        <p>Are you sure you want to withdraw your membership??</p>
         
         <div class="clearfix">
-            <button type="button" class="cancelbtn" onclick="history.back()">Cancel</button>
-            <button type="submit" class="submitbtn">Confirm</button>
+            <button type="button" class="cancelBtn" onclick="history.back()">Cancel</button>
+            <button type="submit" class="submitBtn">Confirm</button>
         </div>
     </form>
 </div>

@@ -2,7 +2,7 @@
 
 {% block title %}{{ page.page_title|striptags }}{% endblock title %}
 
-{% load staticfiles %}
+{% load static %}
 {% block extraStyle %}{% static "style/page/page.css" %}{% endblock extraStyle %}
 {% block extraScript %}{% static "javascript/prism.js" %}{% endblock extraScript %}
 
