@@ -3,3 +3,6 @@ __pycache__/
 /media
 /.security
 /db.sqlite3
+/logs
+.project
+.pydevproject
