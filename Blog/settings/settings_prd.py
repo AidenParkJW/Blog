@@ -3,7 +3,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["blog.anzinda.com"]
+ALLOWED_HOSTS = ["blog.daonelab.com", "blog.home.daonelab.com", "blog.anzinda.com"]
 
 # debug toolbar
 INTERNAL_IPS = [
