@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse-pydev version="1.0"?><pydev_project>
-                                
+                                    
+    
     
     
     
@@ -13,7 +14,8 @@
         <key>DJANGO_SETTINGS_MODULE</key>
         <value>Blog.settings.settings_dev</value>
     </pydev_variables_property>
-                                
+                                    
+    
     
     
     
@@ -21,7 +23,8 @@
     
     
     <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-                                                                
+                                                                        
+        
         
         
         
@@ -29,7 +32,8 @@
         
         
         <path>/${PROJECT_DIR_NAME}</path>
-                                                            
+                                                                    
+    
     
     
     
@@ -37,7 +41,8 @@
     
     
     </pydev_pathproperty>
-                                
+                                    
+    
     
     
     
@@ -45,7 +50,8 @@
     
     
     <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python interpreter</pydev_property>
-                                
+                                    
+    
     
     
     
@@ -53,7 +59,8 @@
     
     
     <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">BlogVenv</pydev_property>
-                            
+                                
+
 
 
 
