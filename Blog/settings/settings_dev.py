@@ -10,6 +10,9 @@ INTERNAL_IPS = [
     #"127.0.0.1",
 ]
 
+DISQUS_WEBSITE_SHORTNAME = "blog-anzinda-com"
+SITE_ID = 1
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
