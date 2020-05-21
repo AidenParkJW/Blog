@@ -1,6 +1,6 @@
 var AttFile = (function() {
-    var _validExts = [];    // ["jpg", "pdf"...], [] is allow all extensions.
-    var _limitSize = 0;     // unit is byte , 0 is unlimited size.
+    var _validExts = [];                // ["jpg", "pdf"...], [] is allow all extensions.
+    var _limitSize = 1024 * 1024 * 100; // unit is byte , 0 is unlimited size.
     
     var _stdFiles = [];
     var _delFiles = [];
@@ -112,9 +112,11 @@ var AttFile = (function() {
             _rtnVal.message = null;
             _totalSize = 0;
             
-            for (var file in _insFiles)
+            for (var i in _insFiles)
             {
-                var _ext = file.split(".")[1];
+                _insFile = _insFiles[i];
+                
+                var _ext = _insFile.name.split(".")[1];
                 if (UT.isNotEmpty(_validExts) && !UT.hasItem(_validExts, _ext))
                 {
                     _rtnVal.isValid = false;
@@ -122,7 +124,7 @@ var AttFile = (function() {
                     break;
                 }
                 
-                _totalSize += file.size;
+                _totalSize += _insFile.size;
                 if (_limitSize > 0 && _totalSize > _limitSize)
                 {
                     _rtnVal.isValid = false;
