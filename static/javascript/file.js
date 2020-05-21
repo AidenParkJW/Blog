@@ -117,11 +117,14 @@ var AttFile = (function() {
                 _insFile = _insFiles[i];
                 
                 var _ext = _insFile.name.split(".")[1];
-                if (UT.isNotEmpty(_validExts) && !UT.hasItem(_validExts, _ext))
+                if (UT.isNotEmpty(_ext))
                 {
-                    _rtnVal.isValid = false;
-                    _rtnVal.message = UT.stringFormat("Invalid file type ({0}).", _ext);
-                    break;
+                    if (UT.isNotEmpty(_validExts) && !UT.hasItem(_validExts, _ext))
+                    {
+                        _rtnVal.isValid = false;
+                        _rtnVal.message = UT.stringFormat("Invalid file type ({0}).", _ext);
+                        break;
+                    }
                 }
                 
                 _totalSize += _insFile.size;
