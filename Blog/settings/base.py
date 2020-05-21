@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MEDIA_URL = "/media/"
 #MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), BASE_DIR + "_media")   # for security
+MEDIA_ROOT = BASE_DIR + "_media"   # for security
 
 UPLOAD_ROOT = "upload"
 UPLOAD_TEMP = os.path.join(MEDIA_ROOT, UPLOAD_ROOT, "temp")
@@ -135,7 +135,7 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = PROPERTIES["limit_file_size"]
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), BASE_DIR + "_static")  # for webserver (python manage.py collectstatic --settings=Blog.settings.settings_prd)
+STATIC_ROOT = BASE_DIR + "_static"  # for webserver (python manage.py collectstatic --settings=Blog.settings.settings_prd)
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Internationalization
