@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-/media
 /.security
 /db.sqlite3
 /logs

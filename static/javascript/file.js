@@ -289,6 +289,9 @@ var AttFile = (function() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function()
             {
+                // https://www.w3schools.com/js/js_ajax_http.asp
+                //console.log(this.readyState + ":" + this.status + ":" + this.statusText);
+                
                 if (this.readyState == 4 && this.status == 200)
                 {
                     var _contentType = xhr.getResponseHeader("content-Type");
@@ -297,6 +300,11 @@ var AttFile = (function() {
                     _a.href = window.URL.createObjectURL(_blob);
                     _a.download = file.name;
                     _a.click();
+                }
+                
+                if (this.readyState == 4 && this.status == 500)
+                {
+                    alert("File not found.");
                 }
             };
 

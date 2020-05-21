@@ -31,7 +31,7 @@ class AttFileAV():
             '''
             if you want to know actual file name, you can use this script 'os.path.basename(_attFile.att_file.name)'
             '''
-            _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size, "thumbUrl": _attFile.image_thumb_url, "imageUrl": _attFile.image_url} for _attFile in qs]
+            _attFiles = [{"uid": signing.dumps(_attFile.att_uid), "name": _attFile.att_name, "size": _attFile.att_file.size if os.path.exists(_attFile.att_file.path) else 0, "thumbUrl": _attFile.image_thumb_url, "imageUrl": _attFile.image_url} for _attFile in qs]
         
         else:
             _attFiles = None
@@ -51,6 +51,10 @@ class AttFileAV():
         
         if request.is_ajax():
             if request.user.is_active:
+                # if upload directory is not exists, make directory.
+                if not os.path.exists(settings.UPLOAD_TEMP):
+                    os.makedirs(settings.UPLOAD_TEMP)
+                
                 # Delete garbage directory older than 1 hour from temporary directory
                 for _dir in pathlib.Path(settings.UPLOAD_TEMP).iterdir():
                     if datetime.fromtimestamp(_dir.stat().st_mtime) < (datetime.now() - timedelta(hours = 1)):

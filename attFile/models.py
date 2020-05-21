@@ -23,7 +23,7 @@ def get_thumb(uri):
 # https://docs.djangoproject.com/en/3.0/ref/models/fields/#django.db.models.FileField.upload_to
 def get_file_path(instance, filename):
     # file will be uploaded to UPLOAD_ROOT/%Y/%m/%d/<content_type>_<object_uid>/<filename>
-    return "{0}/{1}/{2}_{3}/{4}".format(settings.UPLOAD_ROOT, datetime.now().strftime("%Y/%m/%d"), instance.content_type, instance.object_uid, filename)
+    return "{0}/{1}/{2}_{3}/{4}".format(settings.UPLOAD_ROOT, datetime.now().strftime("%Y/%m/%d"), instance.content_type.model, instance.object_uid, filename)
 
 class AttFile(models.Model):
     att_uid         = models.AutoField("Attachment File UID", primary_key=True)

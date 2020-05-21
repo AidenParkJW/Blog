@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     'django.contrib.sites',
     
     # debug toolbar
@@ -119,8 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+#MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), BASE_DIR + "_media")   # for security
 
 UPLOAD_ROOT = "upload"
 UPLOAD_TEMP = os.path.join(MEDIA_ROOT, UPLOAD_ROOT, "temp")
@@ -130,6 +130,13 @@ VALID_EXTENSIONS = PROPERTIES["valid_extensions"]
 # 100MB (1024 * 1024 * 100)
 DATA_UPLOAD_MAX_MEMORY_SIZE = PROPERTIES["limit_file_size"]
 FILE_UPLOAD_MAX_MEMORY_SIZE = PROPERTIES["limit_file_size"]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), BASE_DIR + "_static")  # for webserver (python manage.py collectstatic --settings=Blog.settings.settings_prd)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -143,12 +150,6 @@ USE_L10N = False
 
 # https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#date-and-time-formatting-specifiers
 DATETIME_FORMAT = "Y/m/d H:i:s"
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # login
 #LOGIN_URL = "/accounts/login/"
