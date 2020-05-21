@@ -117,6 +117,7 @@ var AttFile = (function() {
                 _insFile = _insFiles[i];
                 
                 var _ext = _insFile.name.split(".")[1];
+                
                 if (UT.isNotEmpty(_ext))
                 {
                     if (UT.isNotEmpty(_validExts) && !UT.hasItem(_validExts, _ext))
