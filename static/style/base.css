@@ -57,9 +57,7 @@ button:focus {
 /******************************************************** 
  * HEADER 
  ********************************************************/
- 
 div#header {
-    width: 100%;
     background: #eee;
     padding: 10px 0px 5px 0px;
 }
@@ -102,7 +100,6 @@ div#header {
 /******************************************************** 
  * ToolBar 
  ********************************************************/
- 
 div#toolBar {
     width: 100%;
     background-color: #555;
@@ -134,17 +131,12 @@ div#toolBar {
 }
 
 #toolBar .iconBar {
-    width: 100%;
     padding: 0px 0px;
-    display: table;
-}
-
-#toolBar .iconBar div {
-    display: table-cell;
 }
 
 #toolBar .iconBar #topNavi {
-    width: 100%;
+    display: flex;
+    align-items: center;
     padding: 0px 10px 0px 10px;
 }
 
@@ -161,8 +153,8 @@ div#toolBar {
 }
 
 #toolBar .iconBar .searchBar {
-    min-width: 250px;
-    text-align: right;
+    display: flex;
+    align-items: center;
     padding: 0px 10px 0px 10px;
 }
 
@@ -183,13 +175,12 @@ div#toolBar {
 }
 
 #toolBar .iconBar .searchBar input[type=text]:focus {
-    width:100%
+    width: 200px;
 }
 
 /******************************************************** 
  * Main Cantainer 
  ********************************************************/
-
 div#mainContainer {
     min-height: 600px;
     overflow: hidden;   /* for menuNavi */
@@ -199,7 +190,6 @@ div#mainContainer {
 /******************************************************** 
  * CONTENT 
  ********************************************************/
- 
 div#content {
     margin: 20px 20px 20px 20px;
     width: 100%;
@@ -209,7 +199,6 @@ div#content {
 /******************************************************** 
  * MENU 
  ********************************************************/
- 
 div#menuNavi {
     position: relative;
     right: -320px;
@@ -302,7 +291,6 @@ div#footer {
 /******************************************************** 
  * TOP Button
  ********************************************************/
-
 #topBtn {
     display: none;
     position: fixed;
@@ -326,7 +314,6 @@ div#footer {
 /******************************************************** 
  * Icon Button
  ********************************************************/
- 
 .iconBtn {
     background-color: #555;
     border: none;
@@ -405,4 +392,8 @@ div#footer {
     flex: 1 1 auto;
 }
 
-
+@media screen and (max-width: 650px) {
+  div#header {
+    display: block;
+  }
+}

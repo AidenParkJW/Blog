@@ -54,7 +54,7 @@
                 <div id="hScrollBar"></div>
             </div>
             
-            <div class="iconBar">
+            <div class="iconBar box">
                 <button class="iconBtn" onclick="document.getElementById('linkHome').click()"><i class="fa fa-home"></i></button>
                 
                 <div id="topNavi">
@@ -62,7 +62,7 @@
                 {% getMenuPath as menuPath %}
                 {{ menuPath|safe }}
                 </div>
-                
+                <div class="spacer"></div>
                 <div class="searchBar">
                     <form action="{% url 'post:search' %}" method="post">{% csrf_token %}
                         <input type="text" name="search_word" placeholder="Search.." maxlength="20" required/>
