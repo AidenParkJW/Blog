@@ -70,7 +70,7 @@ class PageDV(DetailView):
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
         context["menu_path"] = self.object.menu.getMenuPath()
-        context["images"] = AttFile.objects.filter(Q(page__page_uid=self.object.page_uid) & Q(att_isImage=True))
+        context["images"] = AttFile.objects.filter(Q(page__page_uid=self.object.page_uid) & Q(att_isImage=True))    # SQL equivalent: AttFile.objects.filter(page__page_uid=self.object.page_uid, att_isImage=True)
         return context
 
 # Edit(Create/Update) View

@@ -144,7 +144,7 @@ var UT =
             
         if (fileSize > 0)
         {
-            _fileSize = fileSize / Math.pow(1024, (_i = Math.floor(Math.log(1024, fileSize))));
+            _fileSize = fileSize / Math.pow(1024, (_i = Math.floor(Math.Mylog(1024, fileSize))));
         }
         
         return _fileSize.toFixed(2) + " " + _unit[_i];
@@ -173,7 +173,7 @@ var UT =
     },
 }
 
-Math.log = (function()
+Math.Mylog = (function()
 {
     var log = Math.log;
     return function(base, n)

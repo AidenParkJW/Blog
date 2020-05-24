@@ -1,1 +1,46 @@
 @charset "utf-8";
+
+.homeContainer {
+    
+}
+
+.postsLatest {
+    width: 50%;
+    border: 1px solid black;
+}
+
+.postsViews {
+    width: 50%;
+    border: 1px solid black;
+}
+
+.category {
+    font-size: 12px;
+    color: #aaa;
+}
+
+#chart01 {
+    height: 250px;
+    border: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+#chart02 {
+    height: 250px;
+    border: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+#chart03 {
+    width: 50%;
+    height: 250px;
+    border: 1px solid #ccc;
+    padding-top: 40px; 
+}
+
+#chart04 {
+    width: 50%;
+    height: 250px;
+    border: 1px solid #ccc;
+    padding-top: 40px; 
+}

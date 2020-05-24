@@ -129,7 +129,7 @@ class PostDV(DetailView):
         context = DetailView.get_context_data(self, **kwargs)
         context["isEditable"] = False
         context["menu_path"] = self.object.menu.getMenuPath()
-        context["images"] = AttFile.objects.filter(Q(post__post_uid=self.object.post_uid) & Q(att_isImage=True))
+        context["images"] = AttFile.objects.filter(Q(post__post_uid=self.object.post_uid) & Q(att_isImage=True))    # SQL equivalent: AttFile.objects.filter(post__post_uid=self.object.post_uid, att_isImage=True)
         context["other_posts"] = _otherPosts
         return context
 

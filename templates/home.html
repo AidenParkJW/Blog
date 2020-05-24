@@ -1,10 +1,189 @@
 {% extends "base.html" %}
 
-{% block title %}The Blog for Everybody{% endblock title %}
+{% block title %}{{ site.name }}{% endblock title %}
 
 {% load static %}
 {% block extraStyle %}{% static "style/home.css" %}{% endblock extraStyle %}
+{% block extraScript %}https://www.gstatic.com/charts/loader.js{% endblock extraScript %}
 
 {% block content %}
-{#   {% include "request.html" %}#}
+<div class="homeContainer">
+    <div class="box">
+        <div class="postsLatest">
+        {% for post in postsLatest %}
+            <div>
+                <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
+                <span class="category">| {{ post.menu.menu_name }}</span>
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="space-w10"></div>
+        <div class="space-w10"></div>
+        
+        <div class="postsViews">
+        {% for post in postsViews %}
+            <div>
+                <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
+                <span class="category">| {{ post.menu.menu_name }}</span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    <div id="chart01"></div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    <div id="chart02"></div>
+    
+    <div class="space-h10"></div>
+    <div class="space-h10"></div>
+    
+    <div class="box">
+        <div id="chart03"></div>
+        <div class="space-w10"></div>
+        <div class="space-w10"></div>
+        <div id="chart04"></div>
+    </div>
+</div>
+<script>
+// Load the Visualization API and the corechart package.
+google.charts.load("current", {"packages":["corechart"]});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(
+    function() {
+         drawChart01();
+         drawChart02();
+         drawChart03();
+         drawChart04();
+    }
+);
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart01()
+{
+    // Create the data table.
+    var data = new google.visualization.arrayToDataTable([
+        ["Year/Month", "Posts", "Transition", {role: "annotation"}],
+        {% for item in postsYears %}
+            ["{{ item.yyyy }}/{{ item.mm }}", {{ item.post_cnt }}, {{ item.post_cnt }}, {{ item.post_cnt }}],
+        {% endfor %}
+    ]);
+
+    // Set chart options
+    var options = {"title": "Monthly Registered Post for the Last 1 year"
+        , vAxis: {title: "Posts"}
+        , hAxis: {title: "Year/Month"}
+        , seriesType: "bars"
+        , series: {1: {type: "line"}}
+        };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.ComboChart(document.getElementById("chart01"));
+    chart.draw(data, options);
+    
+    // Responsive layout
+    window.addEventListener("resize", function() 
+    {
+        chart.draw(data, options);
+    });
+}
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart02()
+{
+    // Create the data table.
+    var data = new google.visualization.arrayToDataTable([
+        ["Month/Day", "Users", {role: "annotation"}],
+        {% for item in connStatics %}
+            ["{{ item.mm }}/{{ item.dd }}", {{ item.cnt }}, {{ item.cnt }}],
+        {% endfor %}
+    ]);
+
+    // Set chart options
+    var options = {"title": "Access Statistics for the Last 2 Month"
+        , curveType: "function"
+        , vAxis: {title: "Users"}
+        , hAxis: {title: "Month/Day"}
+        };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById("chart02"));
+    chart.draw(data, options);
+    
+    // Responsive layout
+    window.addEventListener("resize", function() 
+    { 
+        chart.draw(data, options); 
+    });
+}
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart03()
+{
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn("string", "Category");
+    data.addColumn("number", "Posts");
+    data.addRows([
+        {% for item in menuStatics6M %}
+            ["{{ item.menu_name }}", {{ item.post_cnt }}],
+        {% endfor %}
+    ]);
+
+    // Set chart options
+    var options = {"title": "Percentage of Post Registration Category for the Last 6 Months", pieHole: 0.4};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById("chart03"));
+    chart.draw(data, options);
+    
+    // Responsive layout
+    window.addEventListener("resize", function() 
+    { 
+        chart.draw(data, options); 
+    });
+}
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart04()
+{
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn("string", "Category");
+    data.addColumn("number", "Posts");
+    data.addRows([
+        {% for item in menuStaticsALL %}
+            ["{{ item.menu_name }}", {{ item.post_cnt }}],
+        {% endfor %}
+    ]);
+
+    // Set chart options
+    var options = {"title": "Percentage of Post Registration Category for total period", pieHole: 0.4, is3D: true};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById("chart04"));
+    chart.draw(data, options);
+    
+    // Responsive layout
+    window.addEventListener("resize", function() 
+    { 
+        chart.draw(data, options); 
+    });
+}
+</script>
 {% endblock content %}
