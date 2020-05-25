@@ -65,6 +65,22 @@ google.charts.setOnLoadCallback(
     }
 );
 
+// Responsive layout
+var chartDrawList = [];
+window.addEventListener("resize", function() 
+{
+    var _charts = [].slice.call(document.querySelectorAll("[dir=ltr]"));
+    _charts.forEach(function(_chart, index, array)
+    {
+        _chart.style.width = "0px";
+    });
+    
+    chartDrawList.forEach(function(fnc, index, array)
+    {
+        fnc.call();
+    });
+});
+    
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
@@ -90,11 +106,7 @@ function drawChart01()
     var chart = new google.visualization.ComboChart(document.getElementById("chart01"));
     chart.draw(data, options);
     
-    // Responsive layout
-    window.addEventListener("resize", function() 
-    {
-        chart.draw(data, options);
-    });
+    chartDrawList.push(function() {chart.draw(data, options);});
 }
 
 // Callback that creates and populates a data table,
@@ -113,19 +125,16 @@ function drawChart02()
     // Set chart options
     var options = {"title": "Access Statistics for the Last 2 Month"
         , curveType: "function"
-        , vAxis: {title: "Users"}
+        , vAxis: {title: "Users", gridlines: {count: 10}}
         , hAxis: {title: "Month/Day"}
+        , colors: ["green"]
         };
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.LineChart(document.getElementById("chart02"));
     chart.draw(data, options);
     
-    // Responsive layout
-    window.addEventListener("resize", function() 
-    { 
-        chart.draw(data, options); 
-    });
+    chartDrawList.push(function() {chart.draw(data, options);});
 }
 
 // Callback that creates and populates a data table,
@@ -150,11 +159,7 @@ function drawChart03()
     var chart = new google.visualization.PieChart(document.getElementById("chart03"));
     chart.draw(data, options);
     
-    // Responsive layout
-    window.addEventListener("resize", function() 
-    { 
-        chart.draw(data, options); 
-    });
+    chartDrawList.push(function() {chart.draw(data, options);});
 }
 
 // Callback that creates and populates a data table,
@@ -179,11 +184,7 @@ function drawChart04()
     var chart = new google.visualization.PieChart(document.getElementById("chart04"));
     chart.draw(data, options);
     
-    // Responsive layout
-    window.addEventListener("resize", function() 
-    { 
-        chart.draw(data, options); 
-    });
+    chartDrawList.push(function() {chart.draw(data, options);});
 }
 </script>
 {% endblock content %}
