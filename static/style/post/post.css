@@ -561,7 +561,7 @@ input:checked + .slider:before {
     display: table;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 500px) {
   .postDetailContainer .moreInfo,
   .postDetailContainer .buttonBox {
       display: block;
