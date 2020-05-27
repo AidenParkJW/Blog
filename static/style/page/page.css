@@ -28,7 +28,7 @@
 }
 
 .moreInfo .buttonBox {
-
+    text-align: right;
 }
 
 .pageDetailContainer .pageContent {
@@ -203,4 +203,10 @@
     content: "";
     clear: both;
     display: table;
+}
+
+@media screen and (max-width: 650px) {
+  .pageDetailContainer .moreInfo {
+      display: block;
+  }
 }
