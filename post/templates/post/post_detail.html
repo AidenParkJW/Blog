@@ -45,13 +45,13 @@
     <div class="space-h10"></div>
     
     <div class="buttonBox box">
-        <div>
+        <div class="buttonBoxLeft">
             {% if user.is_active %}
             <a href="{{ post.get_create_url }}"><i class="fa fa-edit"> Write</i></a>
             {% endif %}
         </div>
         <div class="spacer"></div>
-        <div>
+        <div class="buttonBoxRight">
             {% if user.id == post.post_crte_user_id or user.is_superuser %}
             <a href="{{ post.get_update_url }}"><i class="fa fa-edit"> Edit</i></a>
             <span class="pipe">|</span>

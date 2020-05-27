@@ -78,6 +78,14 @@ div#emptyMsg .uploadMsg {
     width: 14px;
 }
 
+.fileRow .fileName {
+
+}
+
+.fileRow .fileSize {
+
+}
+
 .fileRow .fileDel {
     padding: 0px 8px;
     font-size: 20px;
@@ -108,8 +116,12 @@ div#fileStatus:hover {
     opacity: 0.8;
 }
 
-div#fileStatus > div {
+div#fileStatus div:not([class=spacer]) {
     padding: 5px 10px;
+}
+
+div#fileStatus div#statusMsg {
+    text-align: right;
 }
 
 div#progressBar {
@@ -124,4 +136,10 @@ div#progressBar {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+  div#fileStatus {
+      display: block;
+  }
 }

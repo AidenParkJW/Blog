@@ -17,7 +17,6 @@
                 <div class="fas fa-cloud-upload-alt uploadIcon"></div>
                 <div class="uploadMsg">Double click or drag & drop to attach files</div>
             </div>
-            
         </div>
         {% endif %}
     </div>
@@ -135,8 +134,9 @@ function addRow(file)
     {% endif %}
     
     var _fileName = document.createElement("div");
+    _fileName.className = "fileName";
     {% if not isEditable %}
-    _fileName.className = "pointer"
+    _fileName.classList.add("pointer");
     _fileName.onclick = function()
                         {
                             AttFile.download(file);
@@ -150,6 +150,7 @@ function addRow(file)
     _fileRow.appendChild(_spacer);
     
     var _fileSize = document.createElement("div");
+    _fileSize.className = "fileSize";
     _fileSize.appendChild(document.createTextNode(UT.formatedFileSize(file.size)));
     _fileRow.appendChild(_fileSize);
     

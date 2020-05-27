@@ -328,7 +328,7 @@ input:checked + .slider:before {
 }
 
 .moreInfo .download {
-
+    text-align: right;
 }
 
 .postDetailContainer .postContent {
@@ -337,6 +337,14 @@ input:checked + .slider:before {
 
 .postDetailContainer .buttonBox {
     margin-bottom: 3px;
+}
+
+.postDetailContainer .buttonBox .buttonBoxLeft {
+
+}
+
+.postDetailContainer .buttonBox .buttonBoxRight {
+    text-align: right;
 }
 
 .pipe {
@@ -551,4 +559,11 @@ input:checked + .slider:before {
     content: "";
     clear: both;
     display: table;
+}
+
+@media screen and (max-width: 650px) {
+  .postDetailContainer .moreInfo,
+  .postDetailContainer .buttonBox {
+      display: block;
+  }
 }
