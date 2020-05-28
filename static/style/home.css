@@ -4,19 +4,48 @@
     
 }
 
-.postsLatest {
+.postListName {
     width: 50%;
-    border: 1px solid black;
+    padding: 5px 0px;
 }
 
-.postsViews {
+.postList {
     width: 50%;
-    border: 1px solid black;
+    padding: 10px;
+    background-color: #474e5d;
+    border-radius: 5px;
 }
 
-.category {
-    font-size: 12px;
+.postDate {
+    font-size: 11px;
     color: #aaa;
+}
+
+.postTitle {
+    display: inline-flex;
+    background-color: white;
+    color: black;
+    padding: 5px 15px 5px 10px;
+    margin: 4px;
+    border-radius: 6px;
+    max-width: 70%;
+    overflow: hidden;
+    height: 18px;
+    line-height: 22px;
+}
+
+.postTitle a {
+    text-decoration: none;
+}
+
+.postMenu {
+    display: inline-flex;
+    font-size: 11px;
+    color: #aaa;
+    max-width: 60px;
+    overflow: hidden;
+    height: 18px;
+    line-height: 22px;
 }
 
 #chart01 {
@@ -43,4 +72,10 @@
     height: 250px;
     border: 1px solid #ddd;
     padding-top: 40px; 
+}
+
+@media screen and (max-width: 650px) {
+  .postDate, .postMenu {
+    display: none;
+  }
 }

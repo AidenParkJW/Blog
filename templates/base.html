@@ -19,7 +19,7 @@
 
     <body>
         <div id="header" class="box">
-            <div class="title"><a href="{% url 'home' %}" id="linkHome">{{ site.name }}</a></div>
+            <div class="siteName"><a href="{% url 'home' %}" id="linkHome">{{ site.name }}</a></div>
             <div class="spacer"></div>
             <div class="welcome">
             {% if user.is_active %}

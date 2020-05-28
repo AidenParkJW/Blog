@@ -9,11 +9,23 @@
 {% block content %}
 <div class="homeContainer">
     <div class="box">
-        <div class="postsLatest">
+        <div class="postListName">● Latest Posts</div>
+        
+        <div class="space-w10"></div>
+        <div class="space-w10"></div>
+        
+        <div class="postListName">● Popular posts</div>
+    </div>
+    
+    <div class="box">
+        <div class="postList">
         {% for post in postsLatest %}
             <div>
-                <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
-                <span class="category">| {{ post.menu.menu_name }}</span>
+                <span class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</span>
+                <div class="postTitle"> 
+                    <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
+                </div>
+                <div class="postMenu" title="{{ post.menu.menu_name }}"> | {{ post.menu.menu_name }}</div>
             </div>
         {% endfor %}
         </div>
@@ -21,11 +33,14 @@
         <div class="space-w10"></div>
         <div class="space-w10"></div>
         
-        <div class="postsViews">
+        <div class="postList">
         {% for post in postsViews %}
             <div>
-                <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
-                <span class="category">| {{ post.menu.menu_name }}</span>
+                <span class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</span>
+                <div class="postTitle"> 
+                    <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
+                </div>
+                <div class="postMenu" title="{{ post.menu.menu_name }}"> | {{ post.menu.menu_name }}</div>
             </div>
         {% endfor %}
         </div>
@@ -118,7 +133,7 @@ function drawChart02()
     var data = new google.visualization.arrayToDataTable([
         ["Month/Day", "Users", {role: "annotation"}],
         {% for item in connStatics %}
-            ["{{ item.mm }}/{{ item.dd }}", {{ item.cnt }}, {{ item.cnt }}],
+            ["{{ item.mmdd }}", {{ item.cnt }}, {{ item.cnt }}],
         {% endfor %}
     ]);
 
@@ -126,7 +141,7 @@ function drawChart02()
     var options = {"title": "Access Statistics for the Last 2 Month"
         , curveType: "function"
         , vAxis: {title: "Users", gridlines: {count: 10}}
-        , hAxis: {title: "Month/Day"}
+        , hAxis: {title: "Month/Day", textStyle: {fontSize: 10}}
         , colors: ["green"]
         };
 

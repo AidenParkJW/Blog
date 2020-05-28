@@ -48,7 +48,7 @@ class HomeView(TemplateView):
         if not self.request.user.is_superuser:
             qs03 = qs03.filter(menu__menu_isEnabled=True, post_isEnabled=True)
         
-        _list = []
+        _list01 = []
         for i in range(12):
             _d = _d + timedelta(days = _lastDay)
             _lastDay = calendar.monthrange(_d.year, _d.month)[1]
@@ -59,11 +59,24 @@ class HomeView(TemplateView):
                     _post_cnt = _q["post_cnt"]
                     break
             
-            _list.append(dict({"yyyy": _d.year, "mm": "{:02}".format(_d.month), "post_cnt": _post_cnt}))
+            _list01.append(dict({"yyyy": _d.year, "mm": "{:02}".format(_d.month), "post_cnt": _post_cnt}))
         
         # 4. Access Statistics for the Last 2 Month
         _d = _today - timedelta(days = 60)
         qs04 = Session.objects.annotate(mm=Extract("expire_date", "month"), dd=Extract("expire_date", "day")).values("mm", "dd").annotate(cnt=Count("*")).filter(expire_date__gt=_d).order_by("mm", "dd")
+        
+        _list02 = []
+        for i in range(60):
+            _d = _d + timedelta(days = 1)
+            
+            _cnt = 0
+            for _q in qs04:
+                if _q["mm"] == _d.month and _q["dd"] == _d.day:
+                    _cnt = _q["cnt"]
+                    break
+        
+            _mmdd = "{:02}/{:02}".format(_d.month, _d.day) if i == 0 or _d.day == 1 else "{:02}".format(_d.day)
+            _list02.append(dict({"mmdd": _mmdd, "cnt": _cnt}))
         
         # 5. Percentage of Post Registration Category for the Last 6 Months
         _today = date.today()
@@ -75,8 +88,8 @@ class HomeView(TemplateView):
         
         context["postsLatest"]      = qs01
         context["postsViews"]       = qs02
-        context["postsYears"]       = _list
-        context["connStatics"]      = qs04
+        context["postsYears"]       = _list01
+        context["connStatics"]      = _list02
         context["menuStatics6M"]    = qs05
         context["menuStaticsALL"]   = qs06
         return context
