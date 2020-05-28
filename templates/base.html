@@ -21,9 +21,8 @@
         <div id="header" class="box">
             <div class="title"><a href="{% url 'home' %}" id="linkHome">{{ site.name }}</a></div>
             <div class="spacer"></div>
-            
-            {% if user.is_active %}
             <div class="welcome">
+            {% if user.is_active %}
                 Welcome,
                 <strong>
                     {% load socialaccount %}
@@ -40,13 +39,11 @@
                 / <a href="{% url 'admin:index' %}">View Admin</a>
                 {% endif%}
                 / <a href="{% url 'logout' %}">LOG OUT</a>
-            </div>
             {% else %}
-            <div class="welcome">
                 Welcome, Anonymous / 
                 <a href="{% url 'login' %}">Login</a>
-            </div>
             {% endif %}
+            </div>
         </div>
         
         <div id="toolBar">

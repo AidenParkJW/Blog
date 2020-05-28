@@ -9,23 +9,22 @@
 
 /* The Modal (background) */
 .signUpContainer {
-    position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
+    position: fixed;
+    z-index: 2;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    padding-top: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Add padding to container elements */
 .signUpContainer .signUpForm {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 80px auto;
     border: 1px solid #888;
-    max-width: 600px;
+    max-width: 560px;
     padding: 16px;
 }
 

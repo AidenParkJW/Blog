@@ -39,11 +39,11 @@ window.onscroll = function()
     // When scroll down, showing top button.
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
     {
-        topBtn.style.display = "block";
+        topBtn.classList.add("show");
     }
     else
     {
-        topBtn.style.display = "none";
+        topBtn.classList.remove("show");
     }
 }
 

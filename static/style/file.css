@@ -19,11 +19,11 @@ div#fileBox {
     user-select: none;
 }
 
-.hideFileBox {
+div#fileBox.hideFileBox {
     display: none !important;
 }
 
-.emptyFileBox {
+div#fileBox.emptyFileBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,6 +41,10 @@ div#emptyMsg {
     border-radius: 5px;
 }
 
+div#emptyMsg.hideMsg {
+    display: none !important;
+}
+
 div#emptyMsg .uploadIcon {
     margin-bottom: 5px;
     font-size: 38px;
@@ -48,10 +52,6 @@ div#emptyMsg .uploadIcon {
 
 div#emptyMsg .uploadMsg {
     font-size: 14px;
-}
-
-.hideMsg {
-    display: none !important;
 }
 
 .fileRow {
