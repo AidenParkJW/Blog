@@ -183,8 +183,9 @@ div#toolBar {
  ********************************************************/
 div#mainContainer {
     min-height: 600px;
-    overflow: hidden;   /* for menuNavi */
     display: flex;
+    position: relative;
+    overflow: hidden;
 }
 
 /******************************************************** 
@@ -196,20 +197,25 @@ div#content {
     border: 0px dashed #ccc;
 }
 
+@media screen and (min-width: 650px) {
+    div#content.shrink {
+        margin-right: 260px;
+    }
+}
+
 /******************************************************** 
  * MENU 
  ********************************************************/
 div#menuNavi {
-    position: relative;
-    right: -320px;
-    width: 320px;
+    position: absolute;
+    right: 0px;
+    width: 0px;
     transition: 0.7s;
     /*z-index: 1;*/
-    display: none;
 }
 
 .menuNaviOpen {
-    right: 0px !important;
+    width: 240px !important;
 }
 
 #menuNavi .menuBox {
@@ -244,6 +250,9 @@ div#menuNavi {
     font-size: 12px;
     padding: 4px 0px;
     border: 0px solid black;
+    overflow: hidden;
+    line-height: 18px;
+    height: 14px;
 }
 
 #menuTree span {

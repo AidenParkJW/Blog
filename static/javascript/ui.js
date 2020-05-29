@@ -43,13 +43,14 @@ var UI =
     openMenu : function()
     {
         var _menuNavi = document.getElementById("menuNavi");
-        _menuNavi.style.display = "block";
+        var _content = document.getElementById("content");
+        _content.classList.add("shrink");
         
         // when display is block, animation work. 
         setTimeout(function()
         {
             _menuNavi.classList.add("menuNaviOpen");
-        }, 0);
+        }, 500);
         
         // call ajax
         UT.ajax("POST", "/menu/load/", null,
@@ -97,12 +98,13 @@ var UI =
     closeMenu : function()
     {
         var _menuNavi = document.getElementById("menuNavi");
+        var _content = document.getElementById("content");
         _menuNavi.classList.remove("menuNaviOpen");
         
         // work, after animation
         setTimeout(function()
         {
-            _menuNavi.style.display = "none";
+            _content.classList.remove("shrink");
         }, 500);
     },
     

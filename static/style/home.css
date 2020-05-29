@@ -1,7 +1,8 @@
 @charset "utf-8";
 
 .homeContainer {
-    
+    margin: 20px auto;
+    width: 95%;
 }
 
 .postListName {
@@ -16,19 +17,29 @@
     border-radius: 5px;
 }
 
+.postBox {
+
+}
+
+.postMsg {
+    display: inline-flex;
+    right: 0px;
+}
+
 .postDate {
-    font-size: 11px;
+    display: block;
+    font-size: 10px;
     color: #aaa;
+    align-self: flex-end;
+    padding-bottom: 6px;
 }
 
 .postTitle {
-    display: inline-flex;
     background-color: white;
     color: black;
     padding: 5px 15px 5px 10px;
     margin: 4px;
-    border-radius: 6px;
-    max-width: 70%;
+    border-radius: 10px;
     overflow: hidden;
     height: 18px;
     line-height: 22px;
@@ -39,13 +50,12 @@
 }
 
 .postMenu {
-    display: inline-flex;
     font-size: 11px;
     color: #aaa;
-    max-width: 60px;
-    overflow: hidden;
     height: 18px;
-    line-height: 22px;
+    align-self: flex-end;
+    padding-bottom: 2px;
+    white-space: pre;
 }
 
 #chart01 {
