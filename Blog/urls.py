@@ -57,6 +57,7 @@ urlpatterns = [
     path("page/"    , include("page.urls")),
     path("attFile/" , include("attFile.urls")),
     
+    # session info.
     path("session/" , TemplateView.as_view(template_name="session.html"), name="session"),
     
     # for Static file
