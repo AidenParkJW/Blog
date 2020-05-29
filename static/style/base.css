@@ -185,7 +185,6 @@ div#mainContainer {
     min-height: 600px;
     display: flex;
     position: relative;
-    overflow: hidden;
 }
 
 /******************************************************** 
@@ -211,7 +210,7 @@ div#menuNavi {
     right: 0px;
     width: 0px;
     transition: 0.7s;
-    /*z-index: 1;*/
+    overflow: hidden;
 }
 
 .menuNaviOpen {
@@ -250,9 +249,7 @@ div#menuNavi {
     font-size: 12px;
     padding: 4px 0px;
     border: 0px solid black;
-    overflow: hidden;
-    line-height: 18px;
-    height: 14px;
+    white-space: nowrap;
 }
 
 #menuTree span {
