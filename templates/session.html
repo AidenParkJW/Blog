@@ -1,5 +1,9 @@
+{% extends "base.html" %}
 
-<br/>
+{% block title %}Session info{% endblock title %}
+
+{% block content %}
+{% if user.is_superuser %}
 <p> ----- HttpRequst Attributes -----
 <br/>request.scheme : {{ request.scheme }}
 <br/>request.body : {{ request.body }}
@@ -12,8 +16,7 @@
 <br/>request.POST : {{ request.POST }}
 <br/>request.COOKIES : {{ request.COOKIES }}
 <br/>request.FILES : {{ request.FILES }}
-<br/>request.META : {{ request.META }}
-<br/>request.CONTENT_PARAMS : {{ request.content_params }}
+<br/><br/>request.CONTENT_PARAMS : {{ request.content_params }}
 <br/>
 <p> ----- HttpRequst META items  -----
 {% for key, value in request.META.items %}
@@ -28,8 +31,12 @@
 <br/>request.urlconf : {{ request.urlconf }}
 
 
-<p> ----- HttpRequst Attributes set by middleware  -----
-<br/>request.session : {{ request.session }}
+<p> ----- Session by middleware  -----
+{% for key, value in request.session.items %}
+    <br/>{{ key }} : {{ value }}
+{% endfor %}
+<br/>
+
 <br/>request.site : {{ request.site }}
 <br/>request.user : {{ request.user }}
 
@@ -43,3 +50,5 @@
 <br/>request.read : {{ request.read }}
 <br/>request.readline : {{ request.readline }}
 <br/>request.readlines : {{ request.readlines }}
+{% endif %}
+{% endblock content %}

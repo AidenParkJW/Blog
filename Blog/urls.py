@@ -57,6 +57,8 @@ urlpatterns = [
     path("page/"    , include("page.urls")),
     path("attFile/" , include("attFile.urls")),
     
+    path("session/" , TemplateView.as_view(template_name="session.html"), name="session"),
+    
     # for Static file
     re_path(r"^static/(?P<path>.*)", serve, kwargs={"insecure":True})
     
