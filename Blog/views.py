@@ -31,7 +31,7 @@ class HomeView(TemplateView):
         qs01 = Post.objects.select_related("menu").all().order_by("-post_uid")
         if not self.request.user.is_superuser:
             qs01 = qs01.filter(menu__menu_isEnabled=True, post_isEnabled=True)
-        qs01 = qs01[0:10]
+        qs01 = sorted(qs01[0:10], key=lambda post:post.post_uid, reverse=False)
         
         # 2. 10 by many views
         qs02 = Post.objects.select_related("menu").all().order_by("-post_views")

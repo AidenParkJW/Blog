@@ -16,10 +16,13 @@
             {% for post in postsLatest %}
             <div class="msgBox">
                 {% ifchanged post.menu.menu_name %}
+                <div class="space-h10"></div>
+                <div class="space-h10"></div>
                 <div class="postMenu">{{ post.menu.menu_name }}</div>
                 {% endifchanged %}
+                
                 <div class="postMsg">
-                    <div class="postTitle"> 
+                    <div class="postTitle">
                         <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
                     </div>
                     <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
@@ -38,9 +41,13 @@
             {% for post in postsViews %}
             <div class="msgBox">
                 {% ifchanged post.menu.menu_name %}
+                <div class="space-h10"></div>
+                <div class="space-h10"></div>
                 <div class="postMenu">{{ post.menu.menu_name }}</div>
                 {% endifchanged %}
+                
                 <div class="postMsg">
+                    <div class="rank">{{ forloop.counter|stringformat:"02d" }}</div>
                     <div class="postTitle"> 
                         <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
                     </div>
