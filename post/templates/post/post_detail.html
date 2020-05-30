@@ -114,7 +114,7 @@
     {% url 'post:postDVforDisqus'   post.menu.menu_uid post.post_uid as thisUrlAft %}
     {% replace request.build_absolute_uri thisUrlBfr thisUrlAft as thisUrl %}
     {% set_disqus_url thisUrl %}
-    {% set_disqus_identifier  post.post_uid|stringformat:"i" %}
+    {% set_disqus_identifier post.post_uid|stringformat:"i" %}
     {% disqus_show_comments %}
 </div>
 {% endblock content %}

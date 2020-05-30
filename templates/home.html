@@ -21,12 +21,14 @@
         <div class="postList">
         {% for post in postsLatest %}
             <div class="postBox">
+                {% ifchanged post.menu.menu_name %}
+                <div class="postMenu" title="{{ post.menu.menu_name }}">{{ post.menu.menu_name }}</div>
+                {% endifchanged %}
                 <div class="postMsg">
-                    <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                     <div class="postTitle"> 
                         <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
                     </div>
-                    <div class="postMenu" title="{{ post.menu.menu_name }}"> | {{ post.menu.menu_name }}</div>
+                    <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                 </div>
             </div>
         {% endfor %}
@@ -37,12 +39,14 @@
         <div class="postList">
         {% for post in postsViews %}
             <div class="postBox">
+                {% ifchanged post.menu.menu_name %}
+                <div class="postMenu" title="{{ post.menu.menu_name }}">{{ post.menu.menu_name }}</div>
+                {% endifchanged %}
                 <div class="postMsg">
-                    <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                     <div class="postTitle"> 
                         <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
                     </div>
-                    <div class="postMenu" title="{{ post.menu.menu_name }}"> | {{ post.menu.menu_name }}</div>
+                    <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                 </div>
             </div>
         {% endfor %}

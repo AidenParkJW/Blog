@@ -40,9 +40,7 @@
     padding: 5px 15px 5px 10px;
     margin: 4px;
     border-radius: 10px;
-    overflow: hidden;
-    height: 18px;
-    line-height: 22px;
+    margin-left: 20px;
 }
 
 .postTitle a {
@@ -52,10 +50,9 @@
 .postMenu {
     font-size: 11px;
     color: #aaa;
-    height: 18px;
     align-self: flex-end;
-    padding-bottom: 2px;
     white-space: nowrap;
+    margin-top: 20px;
 }
 
 #chart01 {
