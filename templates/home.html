@@ -8,48 +8,47 @@
 
 {% block content %}
 <div class="homeContainer">
-    <div class="box">
-        <div class="postListName">● Latest Posts</div>
-        
-        <div class="space-w10"></div>
-        <div class="space-w10"></div>
-        
-        <div class="postListName">● Popular posts</div>
-    </div>
-    
-    <div class="box">
+    <div id="postBox" class="box">
         <div class="postList">
-        {% for post in postsLatest %}
-            <div class="postBox">
+            <div class="space-h10"></div>
+            <div class="postListName"><span>● Latest Posts</span></div>
+            
+            {% for post in postsLatest %}
+            <div class="msgBox">
                 {% ifchanged post.menu.menu_name %}
-                <div class="postMenu" title="{{ post.menu.menu_name }}">{{ post.menu.menu_name }}</div>
+                <div class="postMenu">{{ post.menu.menu_name }}</div>
                 {% endifchanged %}
                 <div class="postMsg">
                     <div class="postTitle"> 
-                        <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
+                        <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
                     </div>
                     <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+            <div class="space-h10"></div>
         </div>
 
         <div class="space-w10"></div>
         
         <div class="postList">
-        {% for post in postsViews %}
-            <div class="postBox">
+            <div class="space-h10"></div>
+            <div class="postListName"><span>● Popular Posts</span></div>
+            
+            {% for post in postsViews %}
+            <div class="msgBox">
                 {% ifchanged post.menu.menu_name %}
-                <div class="postMenu" title="{{ post.menu.menu_name }}">{{ post.menu.menu_name }}</div>
+                <div class="postMenu">{{ post.menu.menu_name }}</div>
                 {% endifchanged %}
                 <div class="postMsg">
                     <div class="postTitle"> 
-                        <a href="{{ post.get_absolute_url }}" title="{{ post.post_title|striptags }}">{{ post.post_title|striptags }}</a>
+                        <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
                     </div>
                     <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+            <div class="space-h10"></div>
         </div>
     </div>
     

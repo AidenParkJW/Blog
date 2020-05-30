@@ -5,33 +5,35 @@
     width: 95%;
 }
 
-.postListName {
-    width: 50%;
-    padding: 5px 0px;
-}
-
 .postList {
     width: 50%;
-    padding: 10px;
     background-color: #474e5d;
     border-radius: 5px;
 }
 
-.postBox {
+.postListName {
+    padding: 5px 0px;
+    text-align: center;
+}
 
+.postListName span {
+    border-radius: 15px;
+    padding: 5px 25px;
+    background-color: lightyellow;
+}
+
+.msgBox {
+    margin: 0px 15px 0px 15px;
+}
+.postMenu {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 20px;
 }
 
 .postMsg {
     display: inline-flex;
-    right: 0px;
-}
-
-.postDate {
-    display: block;
-    font-size: 10px;
-    color: #aaa;
-    align-self: flex-end;
-    padding-bottom: 6px;
+    margin-left: 20px;
 }
 
 .postTitle {
@@ -40,19 +42,17 @@
     padding: 5px 15px 5px 10px;
     margin: 4px;
     border-radius: 10px;
-    margin-left: 20px;
 }
 
 .postTitle a {
     text-decoration: none;
 }
 
-.postMenu {
-    font-size: 11px;
+.postDate {
+    font-size: 10px;
     color: #aaa;
     align-self: flex-end;
-    white-space: nowrap;
-    margin-top: 20px;
+    padding-bottom: 6px;
 }
 
 #chart01 {
@@ -82,7 +82,11 @@
 }
 
 @media screen and (max-width: 650px) {
-  .postDate, .postMenu {
-    display: none;
-  }
+    div#postBox {
+        display: block;
+    }
+    
+    .postList {
+        width: 100%;
+    }
 }
