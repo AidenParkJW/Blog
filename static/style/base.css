@@ -288,9 +288,9 @@ div#footer {
 }
 
 @media screen and (max-height: 500px) {
-  div#footer {
-     /*display: none;*/
-  }
+    div#footer {
+        /*display: none;*/
+    }
 }
 
 
@@ -403,7 +403,7 @@ div#footer {
 }
 
 @media screen and (max-width: 650px) {
-  div#header {
-    display: block;
-  }
+    div#header {
+        display: block;
+    }
 }
