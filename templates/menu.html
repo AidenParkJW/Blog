@@ -1,7 +1,12 @@
 <div class="menuBox">
     <a href="javascript:void(0)" class="closeBtn" onclick="UI.switchMenu()">&times;</a>
     
-    <div id="menuTop"></div>
+    <div id="menuTop">
+        <i class="fas fa-history"> History</i>
+        <div id="history"></div>
+    </div>
+    
+    <div class="menuGap"></div>
     
     <div id="menuTree"></div>
     
@@ -9,5 +14,6 @@
 </div>
 
 <script>
+UI.loadHistory();
 UI.autoOpenMenu();
 </script>

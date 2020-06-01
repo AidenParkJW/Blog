@@ -25,11 +25,9 @@
 .msgBox {
     margin: 0px 15px 0px 15px;
 }
-.postMenu {
+.postMenu a {
     font-size: 11px;
     color: #aaa;
-    align-self: flex-end;
-    white-space: nowrap;
 }
 
 .postMsg {
@@ -48,12 +46,19 @@
 
 .postTitle {
     background-color: white;
-    color: black;
     padding: 5px 10px 5px 10px;
     margin: 4px;
     border-radius: 10px;
 }
 
+.postTitle:hover {
+    background-color: steelblue;
+}
+
+.postTitle:hover > a {
+    color: white;
+}
+    
 .postTitle a {
     text-decoration: none;
 }

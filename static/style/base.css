@@ -234,7 +234,57 @@ div#menuNavi {
 }
 
 .menuBox #menuTop {
-    height: 20px;
+    margin: 10px 10px 10px 15px;
+    border: 0px solid black;
+}
+
+.menuBox #menuTop i {
+    margin-bottom: 5px;
+    color: tomato;
+    white-space: nowrap;
+}
+
+.menuBox #menuTop #history {
+    overflow: hidden;
+}
+
+#history .historyTitle {
+    font-size: 12px;
+    padding: 1px 0px;
+    white-space: nowrap;
+    display: inline-flex;
+    width: 100%;
+    border: 1px solid #f9f9f9;
+}
+
+#history .historyTitle a {
+    text-decoration: none;
+}
+
+#history .historyTitle:hover{
+    border-bottom: 1px solid #aaa;
+}
+
+#history .historyTitle:hover .historyDel {
+    display: block;
+}
+
+#history .historyDel {
+    position: absolute;
+    right: 10px;
+    background-color: #f9f9f9;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    align-self: center;
+    display: none;
+}
+
+.menuBox .menuGap {
+    margin: 15px 10px 20px 10px;
+    border-top: 1px dashed #aaa;
 }
 
 .menuBox #menuTree {

@@ -18,7 +18,7 @@
                 {% ifchanged post.menu.menu_name %}
                 <div class="space-h10"></div>
                 <div class="space-h10"></div>
-                <div class="postMenu">{{ post.menu.menu_name }}</div>
+                <div class="postMenu"><a href="{{ post.menu.menu_url }}">{{ post.menu.menu_name }}</a></div>
                 {% endifchanged %}
                 
                 <div class="postMsg">
@@ -43,7 +43,7 @@
                 {% ifchanged post.menu.menu_name %}
                 <div class="space-h10"></div>
                 <div class="space-h10"></div>
-                <div class="postMenu">{{ post.menu.menu_name }}</div>
+                <div class="postMenu"><a href="{{ post.menu.menu_url }}">{{ post.menu.menu_name }}</a></div>
                 {% endifchanged %}
                 
                 <div class="postMsg">

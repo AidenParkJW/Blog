@@ -21,6 +21,7 @@ class PageDV(DetailView):
     model = Page
     template_name ="page/page_detail.html"
     
+    # override
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)

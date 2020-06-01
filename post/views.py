@@ -1,9 +1,14 @@
+from datetime import timedelta, datetime
+import json
+from urllib import parse
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, F
 from django.http.response import Http404
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
+from django.utils.html import strip_tags
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -77,6 +82,40 @@ class PostLV(ListView):
 class PostDV(DetailView):
     model = Post
     template_name = "post/post_detail.html"
+    
+    # override
+    def get(self, request, *args, **kwargs):
+        _response = DetailView.get(self, request, *args, **kwargs)
+    
+        '''
+        Save History
+        json.loads : String -> python object
+        https://docs.python.org/3/library/json.html?highlight=json#json.loads
+        
+        https://docs.python.org/3/library/urllib.parse.html?highlight=parse#urllib.parse.quote
+        https://docs.python.org/3/library/urllib.parse.html?highlight=parse#urllib.parse.unquote
+        '''
+        
+        _history = json.loads(parse.unquote(self.request.COOKIES.get("history", "[]")))
+        #_history = json.loads(self.request.COOKIES.get("history", "[]"))
+        #print(_history)
+        _findItem = [_item for _item in _history if _item["url"] == self.request.path]
+ 
+        if not _findItem:
+            _history.insert(0, dict({"url": self.object.get_absolute_url(), "title": strip_tags(self.object.post_title)}))
+        else:
+            _findItem[0]["title"] = strip_tags(self.object.post_title)
+            _history.remove(_findItem[0])
+            _history.insert(0, _findItem[0])
+         
+        _expires = datetime.strftime(datetime.now() + timedelta(days = 30), "%a, %d-%b-%Y %H:%M:%S GMT")
+        _json = parse.quote(str(_history[0:10]).replace("'", "\""))
+        #_json = json.dumps(_history[0:10])
+        #print(_history[0:10])
+        #print(_json)
+        _response.set_cookie("history", _json, expires=_expires)
+        
+        return _response
     
     # override
     def get_object(self, queryset=None):

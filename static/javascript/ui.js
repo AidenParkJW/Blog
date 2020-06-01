@@ -1,5 +1,41 @@
 var UI =
 {
+    loadHistory : function()
+    {
+        _history = /(\[.+\])/.exec(UT.getCookie("history"));
+        
+        $("#history").empty();
+        
+        if (UT.isNotEmpty(_history))
+        {
+            _postHistory = JSON.parse(_history[1]);
+            
+            _postHistory.forEach(function(data, index, array)
+            {
+                var _div = document.createElement("div");
+                _div.className = "historyTitle";
+                var _a = document.createElement("a");
+                _a.href = data.url;
+                _a.title = data.title;
+                _a.appendChild(document.createTextNode("● " + data.title));
+                _div.appendChild(_a);
+                
+                var _del = document.createElement("div");
+                _del.className = "historyDel";
+                _del.appendChild(document.createTextNode("×"));
+                _del.onclick = function()
+                {
+                    _postHistory.splice(index, 1);
+                    UT.setCookie("history", JSON.stringify(_postHistory), 30);
+                    UI.loadHistory();
+                }
+                _div.appendChild(_del);
+                
+                $("#history").append(_div);
+            });
+        }
+    },
+        
     switchMenu : function()
     {
         var _isOpenedMenu = UT.getCookie("isOpenedMenu");

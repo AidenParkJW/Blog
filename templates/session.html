@@ -3,6 +3,7 @@
 {% block title %}Session info{% endblock title %}
 
 {% block content %}
+<div>
 {% if user.is_superuser %}
 <p> ----- HttpRequst Attributes -----
 <br/>request.scheme : {{ request.scheme }}
@@ -51,4 +52,5 @@
 <br/>request.readline : {{ request.readline }}
 <br/>request.readlines : {{ request.readlines }}
 {% endif %}
+</div>
 {% endblock content %}
