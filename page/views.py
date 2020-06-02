@@ -33,7 +33,10 @@ class PageDV(DetailView):
             return redirect(self.object.get_create_url())
         
         else:
-            return self.render_to_response(context)
+            _response = self.render_to_response(context)
+            _response.set_cookie("page_{}".format(self.object.page_uid), "Y")   # Update only once per session
+            
+            return _response
     
     # override
     def get_object(self, queryset=None):
@@ -55,11 +58,14 @@ class PageDV(DetailView):
             Otherwise, unnecessary page_isEnabled update occurs.
             And after the work is done, signal connect is needed again.
             '''
-            # UPDATE for page_views + 1
-            if Signal.disconnect(post_save, receiver=updateIsEnabled, sender=Page):
-                page.page_views += 1
-                page.save(update_fields=["page_views"])
-                Signal.connect(post_save, receiver=updateIsEnabled, sender=Page)
+               
+            # Update only once per session
+            if self.request.COOKIES.get("page_{}".format(page.page_uid), "N") == "N":
+                # UPDATE for page_views + 1
+                if Signal.disconnect(post_save, receiver=updateIsEnabled, sender=Page):
+                    page.page_views += 1
+                    page.save(update_fields=["page_views"])
+                    Signal.connect(post_save, receiver=updateIsEnabled, sender=Page)
             
         except Page.DoesNotExist as e:
             page = Page()

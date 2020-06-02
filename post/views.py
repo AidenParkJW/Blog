@@ -114,6 +114,7 @@ class PostDV(DetailView):
         #print(_history[0:10])
         #print(_json)
         _response.set_cookie("history", _json, expires=_expires)
+        _response.set_cookie("post_{}".format(self.object.post_uid), "Y")   # Update only once per session
         
         return _response
     
@@ -130,9 +131,11 @@ class PostDV(DetailView):
                 if not post.menu.menu_isEnabled or not post.post_isEnabled:
                     raise PermissionDenied
             
-            # UPDATE for post_views + 1
-            post.post_views += 1
-            post.save(update_fields=["post_views"])
+            # Update only once per session
+            if self.request.COOKIES.get("post_{}".format(post.post_uid), "N") == "N":
+                # UPDATE for post_views + 1
+                post.post_views += 1
+                post.save(update_fields=["post_views"])
             
         except Post.DoesNotExist as e:
             raise Http404("Post does not exist")
