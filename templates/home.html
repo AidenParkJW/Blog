@@ -51,6 +51,8 @@
                     <div class="postTitle"> 
                         <a href="{{ post.get_absolute_url }}">{{ post.post_title|striptags }}</a>
                     </div>
+                    <div class="postViews">{{ post.post_views }}</div>
+                    <span class="pipe">|</span>
                     <div class="postDate">{{ post.post_crte_dt|date:"Y.m.d" }}</div>
                 </div>
             </div>

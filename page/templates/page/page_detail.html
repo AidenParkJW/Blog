@@ -19,6 +19,8 @@
             <span class="pipe">|</span>
             {{ page.page_mdfy_dt|date:"Y.m.d H:i:s"}}
             <span class="pipe">|</span>
+            {{ page.page_views }}
+            <span class="pipe">|</span>
             {{ page.page_crte_user.first_name|default:page.page_crte_user.username }}
         </div>
         <div class="spacer"></div>

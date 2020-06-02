@@ -24,6 +24,8 @@
             <span class="pipe">|</span>
             {{ post.post_mdfy_dt|date:"Y.m.d H:i:s"}}
             <span class="pipe">|</span>
+            {{ post.post_views }}
+            <span class="pipe">|</span>
             {{ post.post_crte_user.first_name|default:post.post_crte_user.username }}
         </div>
         <div class="spacer"></div>
