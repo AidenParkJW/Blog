@@ -57,7 +57,7 @@ var UI =
         setTimeout(function()
         {
             // Works great in Chrome and FF but didn't work in IE11 and other old browsers.
-            //window.dispatchEvent(new Event("resize"));
+            // window.dispatchEvent(new Event("resize"));
             
             // for IE and other old browsers
             var event = document.createEvent("HTMLEvents");
@@ -69,10 +69,19 @@ var UI =
     autoOpenMenu : function()
     {
         var _isOpenedMenu = UT.getCookie("isOpenedMenu");
-
-        if (_isOpenedMenu == "true")
+        
+        // Inactivation of menu auto-open Because of the small mobile screen
+        if (UI.getWidth() <= 650)
         {
-            UI.openMenu();
+            // close
+            UT.setCookie("isOpenedMenu", false, 1);
+        }
+        else
+        {
+            if (_isOpenedMenu == "true")
+            {
+                UI.openMenu();
+            }
         }
     },
     
@@ -260,5 +269,15 @@ var UI =
         {
             return null;
         }
-    }
+    },
+    
+    getWidth : function()
+    {
+        return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    },
+    
+    getHeight : function()
+    {
+        return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    },
 }
