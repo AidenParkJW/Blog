@@ -78,26 +78,13 @@
     padding: 0px 4px 6px 4px;
 }
 
-#chart01 {
+.wideChart {
     height: 250px;
     border: 1px solid #ddd;
     padding-bottom: 10px;
 }
 
-#chart02 {
-    height: 250px;
-    border: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-#chart03 {
-    width: 50%;
-    height: 250px;
-    border: 1px solid #ddd;
-    padding-top: 40px; 
-}
-
-#chart04 {
+.halfChart {
     width: 50%;
     height: 250px;
     border: 1px solid #ddd;
@@ -105,11 +92,11 @@
 }
 
 @media screen and (max-width: 650px) {
-    div#postBox {
+    .homeContainer div[class=box] {
         display: block;
     }
     
-    .postList {
+    .postList, .halfChart {
         width: 100%;
     }
 }
