@@ -84,7 +84,7 @@
 #slide .slideImgs:hover .desc,
 #slide .slideImgs:hover .prevSlideBtn,
 #slide .slideImgs:hover .nextSlideBtn  {
-        visibility: visible !important;
+    visibility: visible !important;
 }
 
 #slide .slideImg {
