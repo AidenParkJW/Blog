@@ -49,6 +49,7 @@
     padding: 5px 10px 5px 10px;
     margin: 4px;
     border-radius: 10px;
+    word-break: break-word;
 }
 
 .postTitle:hover {

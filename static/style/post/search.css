@@ -78,7 +78,7 @@
 }
 
 .rsltRow .rlstCont {
-
+    word-break: break-word;
 }
 
 .rsltRow .rlstInfo {
