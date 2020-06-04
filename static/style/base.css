@@ -107,14 +107,14 @@ div#toolBar {
     padding-bottom: 0px;
 }
 
-.sticky {
+.stickyToolBar {
     z-index: 1;
     position: fixed;
     top: 0px;
 }
 
 /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + #mainContainer {
+.stickyToolBar + #mainContainer {
     padding-top: 40px;
 }
 
@@ -213,6 +213,13 @@ div#menuNavi {
     overflow: hidden;
 }
 
+.stickyMenuNavi {
+    z-index: 1;
+    position: fixed !important;
+    top: 46px;
+}
+
+
 .menuNaviOpen {
     width: 240px !important;
 }
@@ -283,16 +290,40 @@ div#menuNavi {
 }
 
 .menuBox .menuGap {
-    margin: 15px 10px 20px 10px;
+    margin: 15px 10px 0px 10px;
     border-top: 1px dashed #aaa;
 }
 
 .menuBox #menuTree {
-    min-height: 500px;
+    border: 0px solid black;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 200px;
+}
+
+/* width */
+.menuBox #menuTree::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+.menuBox #menuTree::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+ 
+/* Handle */
+.menuBox #menuTree::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #888;
+}
+
+/* Handle on hover */
+.menuBox #menuTree::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 .menuBox #menuBottom {
-    height: 50px;
+    height: 20px;
 }
 
 #menuTree div {

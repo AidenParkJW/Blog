@@ -16,6 +16,7 @@
     font-weight: bold;
     padding: 0px 0px 5px 0px;
     border-bottom: 2px dotted #aaa;
+    word-break: break-word;
 }
 
 .pageDetailContainer .moreInfo {
@@ -27,12 +28,21 @@
     color: #aaa;
 }
 
-.moreInfo .buttonBox {
-    text-align: right;
-}
-
 .pageDetailContainer .pageContent {
     min-height: 600px;
+    word-break: break-word;
+}
+
+.pageDetailContainer .buttonBox {
+    margin-bottom: 3px;
+}
+
+.pageDetailContainer .buttonBox .buttonBoxLeft {
+
+}
+
+.pageDetailContainer .buttonBox .buttonBoxRight {
+    text-align: right;
 }
 
 .pipe {
@@ -206,7 +216,5 @@
 }
 
 @media screen and (max-width: 650px) {
-  .pageDetailContainer .moreInfo {
-      display: block;
-  }
+
 }

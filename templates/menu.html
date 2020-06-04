@@ -1,5 +1,5 @@
 <div class="menuBox">
-    <a href="javascript:void(0)" class="closeBtn" onclick="UI.switchMenu()">&times;</a>
+    <div class="space-h10"></div>
     
     <div id="menuTop">
         <i class="fas fa-history"> History</i>
@@ -16,4 +16,20 @@
 <script>
 UI.loadHistory();
 UI.autoOpenMenu();
+
+function resizeMenuTree()
+{
+    var menuTree = document.getElementById("menuTree");
+    menuTree.style.height = UI.getHeight() - menuTree.getBoundingClientRect().top - 20 + "px";
+}
+
+window.addEventListener("resize", function(event) 
+{
+    resizeMenuTree();
+});
+
+window.addEventListener("scroll", function(event) 
+{
+    resizeMenuTree();
+});
 </script>

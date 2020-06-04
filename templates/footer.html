@@ -4,6 +4,7 @@
 
 <script>
 var toolBar = document.getElementById("toolBar");
+var menuNavi = document.getElementById("menuNavi");
 var sticky = toolBar.offsetTop;
 var topBtn = document.getElementById("topBtn");
 topBtn.onclick = function()
@@ -17,11 +18,13 @@ window.onscroll = function()
     // When scroll down, fixing #toolBar area.
     if (window.pageYOffset >= sticky)
     {
-        toolBar.classList.add("sticky");
+        toolBar.classList.add("stickyToolBar");
+        menuNavi.classList.add("stickyMenuNavi");
     }
     else
     {
-        toolBar.classList.remove("sticky");
+        toolBar.classList.remove("stickyToolBar");
+        menuNavi.classList.remove("stickyMenuNavi");
     }
     
     // When scroll down, showing Progress bar.

@@ -28,6 +28,7 @@ var UI =
                     _postHistory.splice(index, 1);
                     UT.setCookie("history", JSON.stringify(_postHistory), 30);
                     UI.loadHistory();
+                    UI.fireResize();
                 }
                 _div.appendChild(_del);
                 
@@ -52,18 +53,6 @@ var UI =
             UT.setCookie("isOpenedMenu", true, 1);
             UI.openMenu();
         }
-        
-        // for reset line-numbers in code sample of post
-        setTimeout(function()
-        {
-            // Works great in Chrome and FF but didn't work in IE11 and other old browsers.
-            // window.dispatchEvent(new Event("resize"));
-            
-            // for IE and other old browsers
-            var event = document.createEvent("HTMLEvents");
-            event.initEvent("resize", true, false);
-            window.dispatchEvent(event);
-        }, 500);
     },
 
     autoOpenMenu : function()
@@ -95,6 +84,7 @@ var UI =
         setTimeout(function()
         {
             _menuNavi.classList.add("menuNaviOpen");
+            UI.fireResize();
         }, 500);
         
         // call ajax
@@ -127,15 +117,15 @@ var UI =
                             _div.appendChild(_span);
                         }
                         
-                        $("#menuTree").append(_div);
-                        
                         // Adding margin between each different level menu.
-                        if (UT.isNotEmpty(array[index + 1]) && data.level > array[index + 1].level)
+                        if ((index == 0) || UT.isNotEmpty(array[index - 1]) && array[index - 1].level > data.level)
                         {
                             var _gap = document.createElement("div");
                             _gap.className = "space-h10";
                             $("#menuTree").append(_gap);
                         }
+                        
+                        $("#menuTree").append(_div);
                     });
                 });
     },
@@ -150,6 +140,7 @@ var UI =
         setTimeout(function()
         {
             _content.classList.remove("shrink");
+            UI.fireResize();
         }, 500);
     },
     
@@ -269,6 +260,17 @@ var UI =
         {
             return null;
         }
+    },
+    
+    fireResize : function()
+    {
+        // Works great in Chrome and FF but didn't work in IE11 and other old browsers.
+        // window.dispatchEvent(new Event("resize"));
+        
+        // for IE and other old browsers
+        var event = document.createEvent("HTMLEvents");
+        event.initEvent("resize", true, false);
+        window.dispatchEvent(event);
     },
     
     getWidth : function()
