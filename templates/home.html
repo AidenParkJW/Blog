@@ -97,7 +97,7 @@ google.charts.setOnLoadCallback(
 
 // Responsive layout
 var chartDrawList = [];
-window.addEventListener("resize", function() 
+window.addEventListener("resize", function(event) 
 {
     var _charts = [].slice.call(document.querySelectorAll("[dir=ltr]"));
     _charts.forEach(function(_chart, index, array)
